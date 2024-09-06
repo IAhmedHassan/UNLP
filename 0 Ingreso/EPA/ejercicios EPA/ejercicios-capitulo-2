@@ -1,0 +1,228 @@
+{1. Escriba un programa que le permita al robot recoger una flor de la esquina (2,84) si existe.}
+
+programa Ej1
+areas
+  ciudad: AreaC(1,1,100,100)
+robots
+  robot robot1
+  comenzar
+	  pos(2,84)
+	  si (HayFlorEnLaEsquina)
+		  tomarFlor
+fin
+variables
+  Rinfo: robot1
+comenzar
+  AsignarArea(Rinfo,ciudad)
+  Iniciar(Rinfo,1,1)
+fin
+
+
+
+
+
+{2.Escriba u programa que le permita al robot recorrer la calle 50 desde la avenida 65 hasta la avenida 23 depositando
+un papel ne cada esquina. Debe avanzar hasta el final aunque durante el recorrido se quede sin papeles.}
+
+programa Ej2
+areas
+  ciudad: AreaC(1,1,100,100)
+robots
+  robot robot1
+  comenzar
+  pos(65,50)
+  derecha
+  repetir 43
+    si (HayPapelEnLaBolsa)
+      depositarPapel
+    si (~posAv(23))
+      mover
+fin
+variables
+  Rinfo: robot1
+comenzar
+  AsignarArea(Rinfo,ciudad)
+  Iniciar(Rinfo,1,1)
+fin
+
+
+
+{CORRECCIÓN: consideran que el siguiente algoritmo es más óptimo:}
+comenzar
+  pos(65,50)
+  derecha
+  repetir 42
+      si (HayPapelEnLaBolsa)
+        depositarPapel
+        mover
+    si (HayPapelEnLaBolsa)
+      depositarPapel
+fin
+
+
+
+{3.Escriba un programa que le permita al robot recorrer el perímetro del cuadrado determinado por (1,1) y (2,2)}
+
+comenzar
+  repetir 4
+    mover
+    derecha
+fin
+
+
+
+{4. Modificar  el  ejercicio  3.  para  que  además  recoja,  de  ser  posible,  un  papel  en  cada esquina.}
+
+comenzar
+  repetir 4
+    si (HayFlorEnLaEsquina)
+      tomarFlor
+    mover
+    derecha
+fin
+
+
+
+{5. Escriba  un  programa  que  le  permita  al  robot  dejar  todas  las  flores  que  lleva  en  su bolsa en la esquina (50,50).}
+
+comenzar
+  pos(50,50)
+  mientras (HayFlorEnLaBolsa)
+    depositarFlor
+fin
+
+
+
+{6. Escriba un programa que le permita al robot recorrer la avenida 75 desde la calle 45 hasta la calle 15 recogiendo todas las flores que encuentre.}
+
+
+comenzar
+  pos(75,45)
+  repetir 2
+    derecha
+  repetir 30
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+    mover
+  mientras (HayFlorEnLaEsquina)
+    tomarFlor
+fin
+
+
+{7. Escriba un programa que le permita al robot recorrer la avenida 10, depositando una flor  en  cada  esquina.  Si  en  algún  momento  del  
+recorrido  se  queda  sin  flores  en  la bolsa, debe seguir caminando (sin depositar) hasta terminar la avenida.}
+
+comenzar
+  pos(10,1)
+  repetir 99
+    si HayFlorEnLaBolsa
+      depositarFlor
+    mover
+  si HayFlorEnLaBolsa
+      depositarFlor
+fin
+
+
+
+{8. Escriba  un  programa  que  le  permita  al  robot  recorrer  la  avenida  23  buscando  una esquina sin papeles que seguro existe.
+Al encontrarla debe depositar, en esa esquina, todos los papeles que lleva en su bolsa. Informar en que calle dejó los papeles.}
+
+comenzar
+  pos(23,1)
+  mientras ~HayPapelEnLaEsquina
+    mover
+  mientras HayPapelEnLaBolsa
+    depositarPapel
+  Informar (PosCa) 
+fin
+
+
+
+{9. Escriba un programa que le permita al robot recorrer la calle 17 depositando un papel en las avenidas impares. El recorrido
+termina cuando el robot a llega a la esquina (100,17).}
+
+
+
+comenzar
+  pos(1,17)
+  depositarPapel
+  repetir 49
+    repetir 2
+      mover
+    si (HayPapelEnLaBolsa)
+      depositarPapel 
+  mover 
+fin
+
+
+
+{10. Programe al robot para que recorra las 5 primeras avenidas juntando en cada esquina todas las flores y papeles.}
+
+comenzar
+  repetir 5
+    repetir 99
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+        mover
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+    si ~(posAv = 5)
+    pos(PosAv + 1,1)
+fin
+
+
+{
+11. Programe  al  robot  para  que  recorra  el  perímetro  de  la  ciudad  recogiendo  todas  las flores y papeles que encuentre 
+y dejando en cada vértice solo un papel. Puede ocurrir que algún vértice quede vacío si el robot no tiene papeles en su bolsa para depositar.
+}
+
+comenzar
+  repetir 4
+    repetir 99
+      mover
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+    depositarPapel
+    derecha
+fin
+
+
+{
+12. Programe al robot para que recorra todas las calles depositando en cada esquina vacía un papel. En caso de no tener más papeles 
+debe continuar el recorrido (sin depositar).
+}
+comenzar
+derecha
+  repetir 99
+    repetir 99
+      si (HayPapelEnLaBolsa)
+        si ~(HayFlorEnLaEsquina | HayPapelEnLaEsquina)
+          depositarPapel
+      mover
+    si (HayPapelEnLaBolsa)
+        si ~(HayFlorEnLaEsquina | HayPapelEnLaEsquina)
+          depositarPapel  
+    pos(1,PosCa + 1)
+fin
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+mover
+derecha
+tomarFlor
+tomarPapel
+depositarFlor
+depositarPapel
+PosAv
+PosCa
+HayFlorEnLaEsquina
+HayPapelEnLaEsquina
+HayFlorEnLaBolsa
+HayPapelEnLaBolsa
+pos
+Informar
