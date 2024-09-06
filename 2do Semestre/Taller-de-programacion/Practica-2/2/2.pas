@@ -1,3 +1,6 @@
+HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+
 program recursividad;
 type
   lista = ^nodo;
