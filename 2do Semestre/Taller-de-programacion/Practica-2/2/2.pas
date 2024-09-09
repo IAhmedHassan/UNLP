@@ -1,6 +1,3 @@
-HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
-
 program recursividad;
 type
   lista = ^nodo;
@@ -62,7 +59,8 @@ function estaEnLaLista(L : lista; num : integer): boolean;
 begin
   if L <> nil
     then estaEnLaLista := FALSE;
-    else if 
+    else if L^.dato = num
+      then 
 end;
 
 var L : lista; min, num : integer; bool: boolean;
