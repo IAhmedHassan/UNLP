@@ -1,0 +1,26 @@
+;Es mayúscula
+;Escribir un programa que determine si un carácter (un string de longitud 1) es una
+;letra mayúscula. El carácter está almacenado en la variable C, y el resultado se guarda en la variable
+;RES de 8 bits. Si C es mayúscula, debe almacenarse el valor 0FFh en RES; de lo contrario, debe
+;almacenarse 0. Pista: Los códigos de las mayúsculas son todos consecutivos. Buscar en la tabla ASCII
+;los caracteres mayúscula, y observar qué valores ASCII tienen la ‘A’ y la ‘Z’.
+
+org 1000h
+C db 'Z'
+RES db ?
+
+org 2000h
+mov ah, C
+cmp ah, 'A'
+js no
+cmp ah, 'Z' + 1
+jns no
+mov RES, 0FFh
+jmp fin
+
+no:
+mov RES, 0
+
+fin:
+hlt
+end

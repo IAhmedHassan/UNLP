@@ -1,0 +1,31 @@
+org 1000h
+cant db 0
+mensaje db "Hola, buenas tardes"
+fin_mensaje db ?
+
+org 2000h
+mov bx, offset mensaje
+mov al, offset fin_mensaje - offset mensaje
+mov cl, cant
+loop:
+  mov ah, [bx]
+  cmp ah, 'a'
+  jnz sigue
+  inc cl
+  jmp sigue
+sigue:
+  inc bx
+  dec al
+  jz fin
+  jmp loop
+
+
+
+fin: 
+add cl, 30h
+mov cant, cl
+mov bx, offset cant
+mov al, 1
+int 7
+hlt
+end

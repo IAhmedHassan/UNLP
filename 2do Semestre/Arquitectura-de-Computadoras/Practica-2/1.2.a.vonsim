@@ -1,0 +1,22 @@
+;Patrón de Luces Fijo Escribir un programa que encienda las luces con el patrón 11000011, o sea, solo las primeras y las últimas dos luces deben prenderse, y el resto deben apagarse.
+
+PA equ 30h
+PB equ 31h
+CA equ 32h
+CB equ 33h
+
+org 1000h
+
+org 3000h
+CONFIGURAR_PIO:
+  mov al, 0
+  out CB, al
+ret
+
+org 2000h
+call CONFIGURAR_PIO
+mov al, 11000011b
+out PB, al
+  
+int 0
+end

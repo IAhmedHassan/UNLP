@@ -1,0 +1,63 @@
+;5) Acceso con contraseña ⭐⭐
+;Escribir un programa que solicite el ingreso de una contraseña de 4
+;caracteres por teclado, sin visualizarla en pantalla. En caso de coincidir con una clave predefinida (y
+;guardada en memoria) que muestre el mensaje "Acceso permitido"; caso contrario mostrar el mensaje
+;"Acceso denegado", y volver a pedir que se ingrese una contraseña. Al 5to intento fallido, debe mostrarse ;el mensaje “Acceso BLOQUEADO” y terminar el programa.
+
+org 1000h
+contrasenha db "1234"
+entrada db ?,?,?,?
+bienvenida db "Ingrese contraseña: "
+acc_permitido db 10h, "Acceso Permitido"
+acc_bloqueado db 10h, "Acceso Bloqueado"
+acc_error db 10h, "Contraseña incorrecta, intente nuevamente.", 10h
+intentos db 5
+
+org 2000h
+; Bienvenida: imprime el mensaje de bienvenida
+mov bx, offset bienvenida
+mov al, offset acc_permitido - offset bienvenida
+int 7
+; Ingreso: lee la contraseña desde el teclado 
+ingreso:
+mov cl, 4
+mov bx, offset entrada
+loop_ingreso:
+int 6
+inc bx
+dec cl
+jnz loop_ingreso
+
+; Comprobación: comprueba que el intento sea correcto
+comprobar:
+mov cx, 3
+loop_comprobar:
+mov bx, offset contrasenha
+add bx, cx
+mov al, [bx]
+mov bx, offset entrada
+add bx, cx
+cmp al, [bx]
+jnz error
+dec cl
+jnz loop_comprobar
+; Si llega hasta acá, ingresó bien la contraseña.
+mov bx, offset acc_permitido
+mov al, offset acc_bloqueado - offset acc_permitido
+int 7
+jmp final
+
+error:
+mov bx, offset acc_error
+mov al, offset intentos - offset acc_error
+int 7
+dec intentos
+jnz ingreso
+; Si llega hasta acá llegó a los 5 intentos, y bloquea el acceso.
+mov bx, offset acc_bloqueado
+mov al, offset acc_error - offset acc_bloqueado
+int 7
+
+final:
+hlt
+end

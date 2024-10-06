@@ -1,0 +1,124 @@
+;A) Completar las instrucciones del siguiente programa, 
+;que envía a una subrutina 3 valores A, B y C a
+;través de registros AL, AH y CL, calcula AL+AH-CL, y devuelve el resultado en DL.
+
+
+org 1000h
+A db 8
+B db 5
+C db 4
+D db ?
+
+org 3000h
+CALC: 
+mov DL, 0
+add DL, AL
+add DL, AH
+sub DL, CL
+ret
+
+org 2000h
+mov AH, A
+mov AL, B
+mov CL, C
+call CALC
+mov D, DL
+hlt
+
+end
+;---------------------------------------------------------------------------------
+;B) Idem el inciso anterior, 
+pero los valores A, B y C se reciben mediante pasaje de parámetros por valor
+;a través de la pila. El resultado se devuelve de igual forma por el registro dl 
+;y por valor.
+
+org 1000h
+A db 8
+B db 5
+C db 4
+D db ?
+
+org 3000h
+CALC: 
+push bx
+mov dl, 0
+mov bx,sp
+add bx, 8
+mov dl, [bx]
+sub bx, 2
+add dl, [bx]
+sub bx, 2
+sub dl, [bx]
+pop bx
+ret
+
+org 2000h
+mov AL, A
+push AX
+mov AL, B
+push AX
+mov AL, C
+push AX
+call CALC
+mov D, DL
+pop AX
+pop AX
+pop AX
+hlt
+end
+;---------------------------------------------------------------------------------
+
+;C) Modificar el programa anterior para enviar los parámetros A, B y C a través de la pila
+;pero ahora por referencia.
+
+org 1000h
+A db 8
+B db 5
+C db 4
+D db ?
+
+org 3000h
+CALC: 
+push bx
+mov dl, 0
+mov bx,sp
+add bx, 8
+
+mov ax, [bx] ; AX : dirección de A
+mov cx, bx ; CX : ubicación en la pila
+mov bx, ax ; paso dir A a BX para usar dir indirecto
+mov al, byte ptr [bx] ; AX : valor de A
+add dl, al
+mov bx, cx ; reinstauro ubi en pila
+
+sub bx, 2
+mov ax, [bx]
+mov cx, bx
+mov bx, ax
+mov al, byte ptr [bx]
+add dl, al
+mov bx, cx
+
+sub bx, 2
+mov ax, [bx]
+mov cx, bx
+mov bx, ax
+mov al, byte ptr [bx]
+sub dl, al
+pop bx
+ret
+
+org 2000h
+mov AX, offset A
+push AX
+mov AX, offset B
+push AX
+mov AX, offset C
+push AX
+call CALC
+mov D, DL
+pop AX
+pop AX
+pop AX
+hlt
+end

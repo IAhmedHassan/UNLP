@@ -1,0 +1,2 @@
+- [ ] Cómo refactorizar para hacer funciones e importarlas
+- [ ] Ej02Crear15Personas: manejar problemas (cuando la primer edad es 0)

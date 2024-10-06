@@ -1,0 +1,44 @@
+;Verificar Llave Escribir un programa que verifique si la llave de más a la izquierda está prendida. Si es así, mostrar en pantalla el mensaje “Llave prendida”, y de lo contrario mostrar “Llave apagada”. Solo importa el valor de la llave de más a la izquierda (bit más significativo). Recordar que las llaves se manejan con las teclas 0-7.
+
+PA equ 30h
+PB equ 31h
+CA equ 32h
+CB equ 33h
+
+org 1000h
+ON_STR db 12,"Llave prendida"
+OFF_STR db 12,"Llave apagada"
+end_STR db ?
+org 3000h
+CONFIGURAR_PIO:
+  mov al, 0
+  out CB, al
+
+  mov al, 0FFh
+  out CA, al
+ret
+
+PRENDIDA:
+  mov bx, offset ON_STR
+  mov al, offset OFF_STR - offset ON_STR
+  int 7
+ret
+
+org 2000h
+call CONFIGURAR_PIO
+loop:
+  in al, PA
+  and al, 10000000b
+  cmp al, 10000000b
+  jnz APAGADA
+  call PRENDIDA
+  jmp loop
+  APAGADA:
+    mov bx, offset OFF_STR
+    mov al, offset end_STR - offset OFF_STR
+    int 7
+  jmp loop
+
+  
+int 0
+end

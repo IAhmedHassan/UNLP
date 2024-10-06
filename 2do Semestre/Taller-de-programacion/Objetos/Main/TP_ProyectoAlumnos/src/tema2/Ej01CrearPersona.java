@@ -10,7 +10,7 @@ import PaqueteLectura.Lector;
  */
 public class Ej01CrearPersona {
     
-    public static Persona CrearPersona(String[] args) {
+    public static Persona CrearPersona() {
         System.out.print("Nombre:");
         String nombre = Lector.leerString();
         System.out.print("DNI:");
@@ -22,14 +22,8 @@ public class Ej01CrearPersona {
     }
     
     public static void main(String[] args) {
-        System.out.print("Nombre:");
-        String nombre = Lector.leerString();
-        System.out.print("DNI:");
-        int DNI = Lector.leerInt();
-        System.out.print("Edad:");
-        int edad = Lector.leerInt();
-        
-        Persona Pelo = new Persona(nombre,DNI,edad);
+   
+        Persona Pelo = CrearPersona();
         
         System.out.print(Pelo.toString());
     }

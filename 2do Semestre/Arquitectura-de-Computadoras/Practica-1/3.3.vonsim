@@ -1,0 +1,86 @@
+;Reimplementar los programas del Ejercicio 1 - Parte 1, pero ahora implementando las siguientes subrutinas. En todos los casos, recibir los valores por parámetros pasados por registro, y devolver el resultado también por valor y por registro.
+;1. 📄 CONTAR_CAR ⭐ Recibe la dirección de comienzo de un string en BX, su longitud en AL, y el carácter a contar en AH. Retorna en CL la cantidad de veces que aparece el carácter.
+;2. 📄 ES_MAYUS ⭐ Recibe un carácter en el registro AL y retorna en AH el valor 0FFh si es mayúscula y 0 de lo contrario.
+;3. 📄 A_MINUS ⭐ Recibe un carácter mayúscula en AL y lo devuelve como minúscula.
+;4. 📄 STRING_A_MINUS ⭐⭐ Recibe la dirección de comienzo de un string en BX, su longitud enAL. Recorre el string, cambiando a minúscula las letras que sean mayúsculas. No retorna nada, sino que modifica el string directamente en la memoria.
+
+org 1000h
+cant db ?
+boolean db ?
+cadena db "Esto es una cadena"
+fin_cadena db ?
+
+org 3000h
+CONTAR_CAR:
+;Recibe:
+;  BX: dir cadena en BX
+;  AL: long de cadena
+;  AH: caracter a contar
+;Devuelve:
+;  CL: cantidad de veces que aparece
+  mov cl, 0
+  compare:
+  cmp ah, [bx]
+  jnz CC_sigue
+  inc cl
+  CC_sigue:
+  inc bx
+  dec al
+  jz fin
+  jmp compare
+  fin:
+ret
+
+ES_MAYUS:
+;Recibe:
+;  AL: caracter por valor
+;Devuelve:
+;  AH: 0FFh si es mayúscula, o 0 si no
+  cmp AL, 'A'
+  js no
+  cmp AL, 'Z' +1
+  jns no
+  mov ah, 0ffh
+ret
+  no:
+  mov ah, 0
+ret
+
+A_MINUS:
+;Recibe:
+;  AL: caracter en mayúscula
+;Devuelve:
+;  AL: caracter en minuscula
+  push bx
+  mov bx, al
+  add al, 20h
+  
+ret
+
+STRING_A_MINUS:
+;Recibe:
+;  BX: Dir inicio de string
+;  AL: Longitud string
+  mov al, [bx]
+  call ES_MAYUS
+  SAM_compare:
+  cmp ah, 0FFh
+  jnz SAM_sigue
+  ;TODO
+  
+  
+
+
+
+org 2000h
+mov bx, offset cadena
+mov al, offset fin_cadena - offset cadena
+mov ah, 'e'
+call CONTAR_CAR
+mov cant, cl
+mov al, cadena
+call ES_MAYUS
+mov boolean, ah
+call A_MINUS
+int 0
+end

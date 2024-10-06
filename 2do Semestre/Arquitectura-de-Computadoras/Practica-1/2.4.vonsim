@@ -1,0 +1,31 @@
+;4) Mostrar caracteres individuales ⭐
+;a) Escribir un programa que muestre en pantalla las letras mayúsculas (“A” a la “Z”).
+;_Pista:_ Podés buscar los códigos de la “A” y la “Z” en una tabla de códigos ascii. No utilizar un vector.
+;Usar una sola variable de tipo db, e incrementar el valor de esa variable antes de imprimir.
+;b) ¿Qué deberías modificar en a) para mostrar los dígitos (“0” al “9”)? ¿Y para mostrar todos los
+;carácteres disponibles en el código ASCII? Probar en el simulador.
+;c) Modificar el ejercicio b) que muestra los dígitos, para que cada dígito se muestre en una línea
+;separada.
+;_Pista:_ El código ASCII del carácter de nueva línea es el 10, comúnmente llamado “\n” o LF (“line
+;feed” por sus siglas en inglés y porque se usaba en impresoras donde había que “alimentar” una
+;nueva línea).
+
+org 1000h
+nueva_linea db 10h
+letra db ?
+
+org 2000h
+mov letra, 'A'
+loop:
+mov bx, offset nueva_linea
+mov al, 2
+int 7
+inc letra
+cmp byte ptr [bx], 'Z' + 1
+jnz loop
+
+hlt
+end
+
+;b) Para mostrar los dígitos del 0 al 9 o los ASCII solo es necesario cambiar el valor de inicialización 
+;(en la línea 4) por el pedido, además del valor en la condición de corte (linea 10).

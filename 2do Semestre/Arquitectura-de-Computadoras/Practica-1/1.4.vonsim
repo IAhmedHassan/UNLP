@@ -1,0 +1,27 @@
+;Convertir string a minúscula
+;Escribir un programa que convierta todos los carácteres de un string
+;MENSAJE a minúscula. Por ejemplo, si MENSAJE contiene “Hola, Buenas Tardes”, luego de ejecutar el
+;programa debe contener “hola, buenas tardes”.
+
+org 1000h 
+MENSAJE db "HOLAAAAAAAA"
+fin_MENSAJE db ?
+
+org 2000h 
+mov bx, offset MENSAJE
+mov al, offset fin_MENSAJE - offset MENSAJE
+
+loop:
+cmp byte ptr [bx], 'A'
+js sigue
+cmp byte ptr [bx], 'Z' + 1
+jns sigue
+add byte ptr [bx], 20h
+
+sigue:
+inc bx
+dec al
+jnz loop
+
+hlt
+end
