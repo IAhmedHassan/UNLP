@@ -1,6 +1,6 @@
 <h1 align="center"> UNLP </h1>
 Repositorio de apuntes y avance por la carrera de <a href="https://www.info.unlp.edu.ar/licenciatura-en-informatica-plan-2021/">Licenciatura en Informática</a> en la UNLP.
-<br>
+
 
 <ul>
   <li><a href="https://github.com/IAhmedHassan/UNLP/tree/master/1er%20Semestre/Matem%C3%A1tica%20I">(SI101) Matemática I</a></li>
