@@ -16,4 +16,6 @@ Repositorio de apuntes y avance por la carrera de <a href="https://www.info.unlp
 </ul>
 
 En esto estoy trabajando ahora:
-<a href="https://github.com/IAhmedHassan/UNLP/tree/master/2do%20Semestre/Taller-de-programacion/Objetos/Main/TP_ProyectoAlumnos/src">TdP: Objetos</a>
+<ul>
+<li><a href="https://github.com/IAhmedHassan/UNLP/tree/master/2do%20Semestre/Taller-de-programacion/Objetos/Main/TP_ProyectoAlumnos/src">TdP: Objetos</a></li>
+</ul>
