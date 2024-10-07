@@ -11,10 +11,13 @@ package tema3;
 public class Estante {
 	private int capacidad = 20;
 	private final Libro[] libros = new Libro[capacidad];
-	private int numLibros;
+	private int numLibros = 0;
 	
 	public Estante() {
-		numLibros = 0;
+	}
+	
+	public Estante(int unaCapacidad) {
+		capacidad = unaCapacidad;
 	}
 	
 	public boolean estaLleno() {
