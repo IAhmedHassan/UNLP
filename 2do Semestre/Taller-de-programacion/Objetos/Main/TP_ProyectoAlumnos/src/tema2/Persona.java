@@ -12,9 +12,9 @@ public class Persona {
     private int edad; 
     
     public Persona(String unNombre, int unDNI, int unaEdad){
-        this.setNombre(unNombre);
-        this.setDNI(unDNI);
-        this.setEdad(unaEdad); 
+        this.nombre = unNombre;
+        this.DNI = unDNI;
+        this.edad = unaEdad; 
     }
     
     public Persona(){
