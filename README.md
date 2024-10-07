@@ -1,4 +1,4 @@
-<h1 align="center"> UNLP </h1>
+<h1 align="center">💻📚 UNLP 📚💻</h1>
 Repositorio de apuntes y avance por la carrera de <a href="https://www.info.unlp.edu.ar/licenciatura-en-informatica-plan-2021/">Licenciatura en Informática</a> en la UNLP.
 
 
