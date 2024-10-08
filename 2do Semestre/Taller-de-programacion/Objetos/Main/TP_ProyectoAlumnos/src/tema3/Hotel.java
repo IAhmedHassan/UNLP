@@ -36,10 +36,10 @@ public class Hotel {
 	}
 	
 	
-	public void ingresarCliente(int num, Persona ingreso) {
+	public void asignarHabitacion(int num, Persona ingreso) {
 		if (num < this.getCantHabitaciones()) {
 			if (this.habitaciones[num].estaLibre()) {
-				habitaciones[num -1].setCliente(ingreso);	
+				habitaciones[num -1].ingresarCliente(ingreso);	
 			}	
 			else System.out.println("La habitación no está disponible.");
 		} else System.out.println("La habitación no existe.");
@@ -49,10 +49,9 @@ public class Hotel {
 		return this.habitaciones[num];
 	}
 	
-	public void subirCosto(double unMonto) {
+	public void subirPrecios(double unMonto) {
 		for (int i = 0; i < this.getCantHabitaciones(); i++) {
-			habitaciones[i].setCostoPorNoche(
-				habitaciones[i].getCostoPorNoche() + unMonto);
+			habitaciones[i].aumentarCosto(unMonto);
 		}
 }
 
