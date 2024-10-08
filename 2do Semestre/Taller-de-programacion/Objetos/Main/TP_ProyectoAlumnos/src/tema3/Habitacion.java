@@ -12,16 +12,20 @@ import tema2.Persona;
  */
 public class Habitacion {
 	private double costoPorNoche;
-	private boolean estaLibre;
-	private Persona cliente;
+	private boolean estado;
+	private Persona cliente = null;
 	
 	public Habitacion(double unCostoPorNoche) {
-		this.costoPorNoche = unCostoPorNoche;
-		estaLibre = true;
+		this.setCostoPorNoche(unCostoPorNoche);
+		this.setEstado(true);
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 	public Persona getCliente() {
-		if (estaLibre) {	
+		if (this.estaLibre()) {	
 			System.out.println("La habitación está libre.");
 			return null;
 		}
@@ -30,17 +34,40 @@ public class Habitacion {
 	}
 
 	public void setCliente(Persona cliente) {
+		if (this.estaLibre()) {
 		this.cliente = cliente;
-		this.estaLibre = false;
+		this.setEstado(false);	
+			System.out.println("Cliente ingresado correctamente.");
+		} else System.out.println("La habitación ya está ocupada.");
 	}
 
 	public double getCostoPorNoche() {
-		return costoPorNoche;
+		return this.costoPorNoche;
 	}
 
-	public void setCostoPorNoche(double costoPorNoche) {
-		this.costoPorNoche = costoPorNoche;
+	public void setCostoPorNoche(double unCostoPorNoche) {
+		this.costoPorNoche = unCostoPorNoche;
 	}
+	
+	public boolean estaLibre() {
+		return this.estado;
+	}
+
+	@Override
+	public String toString() {
+		String estado, infoCliente;
+		if (this.estaLibre()) { 
+			estado = "libre";
+			infoCliente = "";
+		}
+		else {
+			estado = "ocupado";
+			infoCliente = ", " + cliente;
+		}
+		return this.costoPorNoche + ", " + estado + infoCliente;
+	}
+	
+	
 
 	
 	
