@@ -20,7 +20,7 @@ public class Habitacion {
 		this.setEstado(true);
 	}
 
-	public void setEstado(boolean estado) {
+	private void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 
@@ -32,20 +32,28 @@ public class Habitacion {
 		else 
 			return this.cliente;
 	}
-
-	public void setCliente(Persona cliente) {
+	
+	public void ingresarCliente(Persona unCliente) {
 		if (this.estaLibre()) {
-		this.cliente = cliente;
+		this.setCliente(unCliente);
 		this.setEstado(false);	
 			System.out.println("Cliente ingresado correctamente.");
 		} else System.out.println("La habitación ya está ocupada.");
+	}
+	
+	private void setCliente(Persona cliente) {
+		this.cliente = cliente;
 	}
 
 	public double getCostoPorNoche() {
 		return this.costoPorNoche;
 	}
-
-	public void setCostoPorNoche(double unCostoPorNoche) {
+	
+	public void aumentarCosto(double unCosto) {
+		this.setCostoPorNoche(unCosto + this.getCostoPorNoche());
+	}
+	
+	private void setCostoPorNoche(double unCostoPorNoche) {
 		this.costoPorNoche = unCostoPorNoche;
 	}
 	
