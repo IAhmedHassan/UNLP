@@ -17,6 +17,7 @@ public class DemoFiguras {
         System.out.println("Area: " + cuad.calcularArea()); 
         System.out.println("Representacion del cuadrado: " + cuad.toString()); 
        
+	
     }
     
     

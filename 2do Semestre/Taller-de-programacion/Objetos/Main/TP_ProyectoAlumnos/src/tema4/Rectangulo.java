@@ -43,7 +43,7 @@ public class Rectangulo extends Figura{
     
     public String toString(){
        String aux = super.toString() + 
-                    " Base: " + getBase() +
+                    "Base: " + getBase() +
                     " Altura: " + getAltura();
        return aux;
     }
