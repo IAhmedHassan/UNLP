@@ -27,7 +27,7 @@ public class Persona {
 		this.nombre = nombre;
 	}
 
-	public int getDNI() {
+	private int getDNI() {
 		return this.DNI;
 	}
 
@@ -35,7 +35,7 @@ public class Persona {
 		this.DNI = DNI;
 	}
 
-	public int getEdad() {
+	private int getEdad() {
 		return this.edad;
 	}
 

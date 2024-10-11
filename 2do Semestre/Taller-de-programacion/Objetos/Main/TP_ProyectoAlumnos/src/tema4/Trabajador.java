@@ -16,7 +16,7 @@ public class Trabajador extends Persona{
 		this.setTrabajo(unTrabajo);
 	}
 
-	public String getTrabajo() {
+	private String getTrabajo() {
 		return this.trabajo;
 	}
 
@@ -26,7 +26,7 @@ public class Trabajador extends Persona{
 
 	@Override
 	public String toString() {
-		return super.toString() + "Soy " + this.getTrabajo() + ".";
+		return super.toString() + " Soy " + this.getTrabajo() + ".";
 	}
 	
 	
