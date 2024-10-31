@@ -1,0 +1,76 @@
+programa Ej2
+procesos
+
+  proceso juntarPapeles
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+  fin
+
+  proceso recorrerLado
+  comenzar
+    repetir 20
+      juntarPapeles
+      mover
+  fin
+
+areas
+  r1: AreaP(10,11,10,29) { Area privada para los lados}
+  c1: AreaPC(10,30,10,30) { Area parcialmente compartida para los vertices }
+  r2: AreaP(11,30,29,30)
+  c2: AreaPC(30,30,30,30)
+  r3: AreaP(30,11,30,29)
+  c3: AreaPC(30,10,30,10)
+  r4: AreaP(11,10,29,10)
+  c4: AreaPC(10,10,10,10)
+robots
+  robot robot1
+  comenzar
+    recorrerLado
+  fin
+
+  robot robot2
+  comenzar
+    derecha
+    recorrerLado
+  fin
+
+  robot robot3
+  comenzar
+    derecha
+    derecha
+    recorrerLado
+  fin
+
+  robot robot4
+  comenzar
+    derecha
+    derecha
+    derecha
+    recorrerLado
+  fin
+
+variables
+  pelo: robot1
+  gonza: robot2
+  elIndioSolari: robot3
+  gabi: robot4
+
+comenzar
+  AsignarArea(pelo,r1)
+  AsignarArea(gonza,r2)
+  AsignarArea(pelo,c1)
+  AsignarArea(pelo,c4)
+  AsignarArea(gonza,c1)
+  AsignarArea(gonza,c2)
+  AsignarArea(elIndioSolari,r3)
+  AsignarArea(elIndioSolari,c2)
+  AsignarArea(elIndioSolari,c3)
+  AsignarArea(gabi,r4)
+  AsignarArea(gabi,c3)
+  AsignarArea(gabi,c4)
+  Iniciar(pelo,10,10)
+  Iniciar(gonza,10,30)
+  Iniciar(elIndioSolari,30,30)
+  Iniciar(gabi,30,10)
+fin
