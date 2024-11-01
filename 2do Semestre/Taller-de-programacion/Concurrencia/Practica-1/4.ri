@@ -1,0 +1,69 @@
+programa Ej04
+procesos
+  proceso limpiarFlores
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+  fin
+
+  proceso limpiarPapeles
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+  fin
+
+  proceso procesarAreasImpares
+  comenzar
+    repetir 24
+      repetir 99
+        limpiarFlores
+        mover
+      limpiarFlores
+      Pos((posAv+1),1)
+  fin
+
+  proceso procesarAreasPares
+  comenzar
+    repetir 24
+      repetir 99
+        limpiarPapeles
+        mover
+      limpiarPapeles
+      Pos((posAv+1),1)
+  fin
+
+areas
+area1: AreaP(1,1,25,100)
+area2: AreaP(26,1,50,100)
+area3: AreaP(51,1,75,100)
+area4: AreaP(76,1,100,100)
+
+robots
+
+  robot robot1
+  variables    
+  comenzar
+    procesarAreasImpares
+    Pos(51,1)
+    procesarAreasImpares
+  fin
+
+  robot robot2    
+  comenzar
+    procesarAreasPares
+    Pos(76,1)
+    procesarAreasPares
+  fin
+
+
+variables
+  pelo: robot1
+  gonza: robot2
+comenzar
+  AsignarArea(pelo,area1)
+  AsignarArea(pelo,area3)
+  AsignarArea(gonza,area2)
+  AsignarArea(gonza,area4)
+  Iniciar(pelo,1,1)
+  Iniciar(gonza,26,1)
+fin

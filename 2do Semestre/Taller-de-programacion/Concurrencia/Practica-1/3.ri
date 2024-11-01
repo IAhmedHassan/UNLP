@@ -1,0 +1,60 @@
+programa Ej3
+procesos
+  proceso calcularEsquina(ES cantEscalon)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantFlores := cantFlores + 1
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+    
+    si (cantPapeles = cantFlores + 1)
+      cantEscalon := cantEscalon + 1
+  fin
+
+  proceso recorrerEscalon(E escalon, ES cantEscalon)
+  variables
+    cantFlores : numero
+    cantPapeles : numero
+  comenzar
+    cantFlores := 0
+    cantPapeles := 0
+    cantEscalon := 0
+    repetir escalon
+      calcularEsquina(cantEscalon)
+      mover
+    derecha
+    repetir escalon
+      calcularEsquina(cantEscalon)
+      mover
+    repetir 3
+      derecha
+    escalon := escalon + 1
+
+areas
+  ciudad: AreaC(1,1,100,100)
+robots
+  robot robot1
+  variables
+    escalon : numero
+    cantEscalon : numero
+  comenzar
+    escalon := 1
+    mientras (escalon <= 4)
+      
+  fin
+variables
+  pelo: robot1
+  gonza: robot1
+  elIndioSolari: robot1
+
+comenzar
+  AsignarArea(pelo,ciudad)
+  AsignarArea(gonza,ciudad)
+  AsignarArea(elIndioSolari,ciudad)
+  Iniciar(pelo,12,14)
+  Iniciar(gonza,17,10)
+  Iniciar(elIndioSolari,22,6)
+
+fin
