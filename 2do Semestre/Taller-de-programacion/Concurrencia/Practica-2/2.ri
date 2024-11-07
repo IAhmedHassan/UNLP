@@ -1,0 +1,46 @@
+programa Ej02
+procesos
+
+  proceso procesarEsquina(ES cantFlores,cantPapeles)
+  variables
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantFlores := cantFlores + 1
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+  fin
+areas
+robots
+
+  robot robot1
+  variables
+    altura : numero
+    cantFloresEsc: numero
+    cantPapelesEsc: numero
+    cantEscalon : numero
+  comenzar
+  cantEscalon := 0
+  repetir 4
+    cantFlores := 0
+    cantPapeles := 0
+    procesarEsquina(cantFlores,cantPapeles)
+    Random(altura,1,5)
+    repetir altura
+      mover
+      procesarEsquina(cantFlores,cantPapeles)
+    si cantFlores > cantPapeles
+      cantEscalon := cantEscalon + 1
+    derecha
+    mover
+    repetir 3
+      derecha
+    
+    
+
+
+
+variables
+comenzar
+fin

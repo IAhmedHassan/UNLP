@@ -1,0 +1,106 @@
+programa Ej01d
+procesos
+  proceso limpiarFlores(ES cantFlores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantFlores := cantFlores + 1
+  fin
+
+  proceso carrera(ES cantFlores: numero)
+  comenzar
+    repetir 9
+      limpiarFlores(cantFlores)
+      mover
+    limpiarFlores(cantFlores)
+  fin
+
+areas
+  area1: AreaP(1,1,1,10)
+  area2: AreaP(2,11,2,20)
+  area3: AreaP(3,21,3,30)
+  area4: AreaP(4,31,4,40)
+  area5: AreaP(5,41,5,50)
+  area6: AreaP(6,51,6,60)
+  areaF: AreaP(2,1,2,1)
+robots
+
+  robot robot1
+  variables
+    cantFlores : numero
+    orden : numero
+    
+  comenzar
+    cantFlores := 0
+    RecibirMensaje(orden,fiscal)
+    carrera(cantFlores)
+    EnviarMensaje(orden,fiscal)
+    EnviarMensaje(cantFlores,fiscal)
+  fin
+
+  robot robot2
+  variables
+    ordenActual : numero
+    ordenMax : numero
+    floresMax : numero
+    floresActual : numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+    EnviarMensaje(5,r5)
+    EnviarMensaje(6,r6)
+
+    floresActual := 0
+    floresMax := 0
+    ordenMax := 0
+    repetir 6
+      RecibirMensaje(ordenActual,*)
+      si ordenActual = 1
+        RecibirMensaje(floresActual,r1)
+      sino
+        si ordenActual = 2
+          RecibirMensaje(floresActual,r2)
+        sino
+          si ordenActual = 3
+            RecibirMensaje(floresActual,r2)
+          sino
+            si ordenActual = 4
+              RecibirMensaje(floresActual,r4)
+            sino
+              si ordenActual = 5
+                RecibirMensaje(floresActual,r5)
+              sino
+                RecibirMensaje(floresActual,r6)
+      si floresActual > floresMax
+        ordenMax := ordenActual
+        floresMax := floresActual
+    Informar(ordenMax)
+  fin
+
+variables
+  r1 : robot1
+  r2 : robot1
+  r3 : robot1
+  r4 : robot1
+  r5 : robot1
+  r6 : robot1
+  fiscal : robot2
+
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r2,area2)
+  AsignarArea(r3,area3)
+  AsignarArea(r4,area4)
+  AsignarArea(r5,area5)
+  AsignarArea(r6,area6)
+  AsignarArea(fiscal,areaF)
+  Iniciar(r1,1,1)
+  Iniciar(r2,2,11)
+  Iniciar(r3,3,21)
+  Iniciar(r4,4,31)
+  Iniciar(r5,5,41)
+  Iniciar(r6,6,51)
+  Iniciar(fiscal,2,1)
+fin

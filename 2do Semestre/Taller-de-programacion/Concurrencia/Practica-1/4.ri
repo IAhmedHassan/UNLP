@@ -13,35 +13,44 @@ procesos
   fin
 
   proceso procesarAreasImpares
+  variables
+    i : numero
   comenzar
-    repetir 24
+    i := 1
+    repetir 25
       repetir 99
         limpiarFlores
         mover
       limpiarFlores
-      Pos((posAv+1),1)
+      si(i < 25)
+        Pos((PosAv+1),1)
+      i := i+1
   fin
 
   proceso procesarAreasPares
+  variables
+    i : numero
   comenzar
-    repetir 24
+    i := 1
+    repetir 25
       repetir 99
         limpiarPapeles
         mover
       limpiarPapeles
-      Pos((posAv+1),1)
+      si(i < 25)
+        Pos((PosAv+1),1)
+      i := i+1
   fin
 
 areas
-area1: AreaP(1,1,25,100)
-area2: AreaP(26,1,50,100)
-area3: AreaP(51,1,75,100)
-area4: AreaP(76,1,100,100)
+  area1: AreaP(1,1,25,100)
+  area2: AreaP(26,1,50,100)
+  area3: AreaP(51,1,75,100)
+  area4: AreaP(76,1,100,100)
 
 robots
 
-  robot robot1
-  variables    
+  robot robot1   
   comenzar
     procesarAreasImpares
     Pos(51,1)
