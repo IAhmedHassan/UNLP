@@ -11,7 +11,7 @@
                   daddi $t0, $0, 0
                   sb $0, C($0)
                   j fin
-
+480GB
 
   no_es_igual:    slt $t0, $s1, $s0
                   beqz $t0, B_mayor_que_A
