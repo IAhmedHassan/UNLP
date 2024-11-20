@@ -37,7 +37,8 @@ robots
     RecibirMensaje(id, cc)
     buscarPapel(sigo)
     mientras ((sigo) & (PosCa < 100))
-      depositarPapel
+      si HayPapelEnLaBolsa
+        depositarPapel
       mover
       buscarPapel(sigo)
     EnviarMensaje(id,cc)
