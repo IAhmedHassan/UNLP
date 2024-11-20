@@ -1,0 +1,114 @@
+programa Ej03
+procesos
+  proceso limpiarFlores(ES cantFlores : numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantFlores := cantFlores + 1 
+  fin
+
+  proceso postaA(ES cantFlores : numero)
+  comenzar
+    repetir 9
+      limpiarFlores(cantFlores)
+      mover
+    limpiarFlores(cantFlores)
+  fin
+
+  proceso limpiarPapeles(ES cantPapeles : numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+  fin
+
+  proceso postaB(ES cantPapeles : numero)
+  comenzar
+    repetir 9
+      limpiarPapeles(cantPapeles)
+      mover
+    limpiarPapeles(cantPapeles)
+  fin
+
+areas
+  areaA1: AreaP(1,1,1,10)
+  areaA1_2: AreaP(1,21,1,30)
+  areaA2: AreaP(1,11,1,20)
+  areaA2_2: AreaP(1,31,1,40)
+  areaB1: AreaP(5,1,5,10)
+  areaB1_2: AreaP(5,21,5,30)
+  areaB2: AreaP(5,11,5,20)
+  areaB2_2: AreaP(5,31,5,40)
+robots
+  robot robot1
+  variables
+    cantFlores : numero
+  comenzar
+    cantFlores := 0
+    postaA(cantFlores)
+    EnviarMensaje(cantFlores,A2)
+    Pos(PosAv,PosCa + 11)
+    RecibirMensaje(cantFlores,A2)
+    postaA(cantFlores)
+    EnviarMensaje(cantFlores, A2)
+  fin
+
+  robot robot2
+  variables
+    cantFlores : numero
+  comenzar
+    RecibirMensaje(cantFlores,A1)
+    postaA(cantFlores)
+    EnviarMensaje(cantFlores,A1)
+    Pos(PosAv,PosCa + 11)
+    RecibirMensaje(cantFlores,A1)
+    postaA(cantFlores)
+    Informar(cantFlores)
+  fin
+
+  robot robot3
+  variables
+    cantPapeles : numero
+  comenzar
+    cantPapeles := 0
+    postaB(cantPapeles)
+    EnviarMensaje(cantPapeles,B2)
+    Pos(PosAv,PosCa + 11)
+    RecibirMensaje(cantPapeles,B2)
+    postaB(cantPapeles)
+    EnviarMensaje(cantPapeles,B2)
+  fin
+
+  robot robot4
+  variables
+    cantPapeles : numero
+  comenzar
+    RecibirMensaje(cantPapeles,B1)
+    postaB(cantPapeles)
+    EnviarMensaje(cantPapeles,B1)
+    Pos(PosAv,PosCa + 11)
+    RecibirMensaje(cantPapeles,B1)
+    postaB(cantPapeles)
+    Informar(cantPapeles)
+  fin
+
+
+variables
+  A1 : robot1
+  A2 : robot2
+  B1 : robot3
+  B2 : robot4
+comenzar
+  AsignarArea(A1,areaA1)
+  AsignarArea(A1,areaA1_2)
+  AsignarArea(A2,areaA2)
+  AsignarArea(A2,areaA2_2)
+  AsignarArea(B1,areaB1)
+  AsignarArea(B1,areaB1_2)
+  AsignarArea(B2,areaB2)
+  AsignarArea(B2,areaB2_2)
+  Iniciar(A1,1,1)
+  Iniciar(B1,5,1)
+  Iniciar(A2,1,11)
+  Iniciar(B2,5,11)
+fin

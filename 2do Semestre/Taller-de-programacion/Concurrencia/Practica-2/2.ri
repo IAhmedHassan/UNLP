@@ -1,8 +1,7 @@
 programa Ej02
 procesos
 
-  proceso procesarEsquina(ES cantFlores,cantPapeles)
-  variables
+  proceso procesarEsquina(ES cantFlores : numero; ES cantPapeles : numero)
   comenzar
     mientras HayFlorEnLaEsquina
       tomarFlor
@@ -12,6 +11,10 @@ procesos
       cantPapeles := cantPapeles + 1
   fin
 areas
+  areaF: AreaP(1,1,1,1)
+  area1: AreaP(2,1,6,20)
+  area2: AreaP(7,1,11,20)
+  area3: AreaP(12,1,16,20)
 robots
 
   robot robot1
@@ -21,26 +24,50 @@ robots
     cantPapelesEsc: numero
     cantEscalon : numero
   comenzar
-  cantEscalon := 0
-  repetir 4
-    cantFlores := 0
-    cantPapeles := 0
-    procesarEsquina(cantFlores,cantPapeles)
-    Random(altura,1,5)
-    repetir altura
-      mover
-      procesarEsquina(cantFlores,cantPapeles)
-    si cantFlores > cantPapeles
-      cantEscalon := cantEscalon + 1
-    derecha
-    mover
-    repetir 3
+    cantEscalon := 0
+    repetir 4
+      cantFloresEsc := 0
+      cantPapelesEsc := 0
+      procesarEsquina(cantFloresEsc,cantPapelesEsc)
+      Random(altura,1,5)
+      repetir altura
+        mover
+        procesarEsquina(cantFloresEsc,cantPapelesEsc)
+      si cantFloresEsc > cantPapelesEsc
+        cantEscalon := cantEscalon + 1
       derecha
-    
-    
+      mover
+      repetir 3
+        derecha
+    EnviarMensaje(cantEscalon,fiscal)
+  fin
 
-
+  robot robot2
+  variables
+    cant1: numero
+    cant2: numero
+    cant3: numero
+  comenzar
+    RecibirMensaje(cant1, *)
+    RecibirMensaje(cant2, *)
+    RecibirMensaje(cant3, *)
+    Informar(cant1 + cant2 + cant3)
+  fin
 
 variables
+  r1: robot1
+  r2: robot1
+  r3: robot1
+  fiscal: robot2
+
 comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r2,area2)
+  AsignarArea(r3,area3)
+  AsignarArea(fiscal,areaF)
+  Iniciar(r1,2,1)
+  Iniciar(r2,7,1)
+  Iniciar(r3,12,1)
+  Iniciar(fiscal,1,1)
+
 fin

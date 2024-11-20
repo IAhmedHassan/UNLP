@@ -1,0 +1,129 @@
+programa Ej04
+procesos
+  proceso procesarEsquina(ES cantFlores : numero; ES cantPapeles : numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantFlores := cantFlores + 1
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+  fin
+
+areas
+  ciudad: AreaC(25,25,75,75)
+  inicioR1: AreaP(25,1,25,1)
+  inicioR2: AreaP(30,1,30,1)
+  inicioR3: AreaP(35,1,35,1)
+  inicioR4: AreaP(40,1,40,1)
+robots
+  robot robot1
+  variables
+    sigue: boolean
+    noGano: boolean
+    flores: numero
+    papeles: numero
+    avIni; numero
+    calleIni: numero
+  comenzar
+    nadieGano := V
+    flores := 0
+    papeles := 0
+    calleIni := PosCa
+    avIni := PosAv
+    mientras nadieGano
+      RecibirMensaje(sigue, fiscal)
+      si sigue
+        Pos(Random(25,75),Random(25,75))
+        procesarEsquina(flores,papeles)
+        Pos(avIni,calleIni)
+        EnviarMensaje(sigue, fiscal)
+      sino
+        EnviarMensaje(flores + papeles,fiscal)
+        RecibirMensaje(gane,fiscal)
+        nadieGano := F
+    si gane
+      Pos(50,50)
+    sino
+      Informar(gane)  
+  fin
+
+  robot robot2
+  variables
+  estado: boolean
+  totalR1: numero
+  totalR2: numero
+  totalR3: numero
+  totalR4: numero
+  proximo: numero
+  comenzar
+    estado := V
+    repetir 10
+      proximo := Random(1,4)
+      si proximo = 1
+        EnviarMensaje(estado, r1)
+      sino
+        si proximo = 2
+          EnviarMensaje(estado, r2)
+        sino
+          si proximo = 3
+            EnviarMensaje(estado, r3)
+          sino
+            EnviarMensaje(estado,r4)
+    estado := F
+    EnviarMensaje(estado,r1)
+    EnviarMensaje(estado,r2)
+    EnviarMensaje(estado,r3)
+    EnviarMensaje(estado,r4)
+
+    RecibirMensaje(totalR1,R1)
+    RecibirMensaje(totalR2,R2)
+    RecibirMensaje(totalR3,R3)
+    RecibirMensaje(totalR4,R4)
+
+    si ((totalR1 >= totalR2) & (totalR1 >= totalR3) & (totalR1 >= totalR4))
+      EnviarMensaje(V,R1)
+      EnviarMensaje(F,R2)
+      EnviarMensaje(F,R3)
+      EnviarMensaje(F,R4)
+
+    sino
+      si ((totalR2 >= totalR1) & (totalR2 >= totalR3) & (totalR2 >= totalR4))
+        EnviarMensaje(F,R1)
+        EnviarMensaje(V,R2)
+        EnviarMensaje(F,R3)
+        EnviarMensaje(F,R4)
+      sino
+        si ((totalR3 >= totalR2) & (totalR3 >= totalR1) & (totalR3 >= totalR4))
+          EnviarMensaje(F,R1)
+          EnviarMensaje(F,R2)
+          EnviarMensaje(V,R3)
+          EnviarMensaje(F,R4)
+        sino
+          EnviarMensaje(F,R1)
+          EnviarMensaje(F,R2)
+          EnviarMensaje(F,R3)
+          EnviarMensaje(V,R4)
+    
+
+variables
+  r1: robot1
+  r2: robot1
+  r3: robot1
+  r4: robot1
+  fiscal: robot2
+comenzar
+  AsignarArea(r1,ciudad)
+  AsignarArea(r2,ciudad)
+  AsignarArea(r3,ciudad)
+  AsignarArea(r4,ciudad)
+  AsignarArea(r1,inicioR1)
+  AsignarArea(r2,inicioR2)
+  AsignarArea(r3,inicioR3)
+  AsignarArea(r4,inicioR4)
+  Iniciar(fiscal,1,1)
+  Iniciar(r1,25,1)
+  Iniciar(r2,30,1)
+  Iniciar(r3,35,1)
+  Iniciar(r4,40,1)
+fin
