@@ -1,0 +1,100 @@
+programa Ej05
+procesos
+
+  proceso buscarPapel(ES sigo : boolean)
+  variables
+    Ca: numero
+    Av: numero
+  comenzar
+    Ca := PosCa
+    Av := PosAv
+    BloquearEsquina(11,11)
+    Pos(11,11)
+    si HayPapelEnLaEsquina
+      tomarPapel
+      sigo := V
+    sino
+      sigo := F
+    Pos(Av,Ca)
+    LiberarEsquina(11,11)
+  fin
+
+areas
+  aR1: AreaP(4,1,4,100)
+  aR2: AreaP(6,1,6,100)
+  aR3: AreaP(8,1,8,100)
+  aR4: AreaP(10,1,10,100)
+  fuente: AreaC(11,11,11,11)
+  aCoord: AreaP(1,1,1,1)
+
+robots
+  robot corredor
+  variables
+    id : numero
+    sigo: boolean
+  comenzar
+    sigo := V
+    RecibirMensaje(id, cc)
+    buscarPapel(sigo)
+    mientras ((sigo) & (PosCa < 100))
+      depositarPapel
+      mover
+      buscarPapel(sigo)
+    EnviarMensaje(id,cc)
+    EnviarMensaje(PosCa, cc)
+  fin
+
+  robot coordinador
+  variables
+    c: numero
+    cMax: numero
+    ca: numero
+    caMax: numero
+  comenzar
+    EnviarMensaje(1,c1)
+    EnviarMensaje(2,c2)
+    EnviarMensaje(3,c3)
+    EnviarMensaje(4,c4)
+
+    repetir 4
+      RecibirMensaje(c, *)
+      si c = 1
+        RecibirMensaje(ca,c1)
+      sino
+        si c = 2
+          RecibirMensaje(ca,c2)
+        sino
+          si c = 3
+            RecibirMensaje(ca,c3)
+          sino
+            RecibirMensaje(ca,c4)
+      si ca > caMax
+        caMax := ca
+        cMax := c1
+    Informar(cMax)
+  fin
+
+
+variables
+  c1: corredor
+  c2: corredor
+  c3: corredor
+  c4: corredor
+  cc: coordinador
+comenzar
+  AsignarArea(c1,aR1)
+  AsignarArea(c2,aR2)
+  AsignarArea(c3,aR3)
+  AsignarArea(c4,aR4)
+  AsignarArea(cc,aCoord)
+  AsignarArea(c1,fuente)
+  AsignarArea(c2,fuente)
+  AsignarArea(c3,fuente)
+  AsignarArea(c4,fuente)
+  Iniciar(c1,4,1)
+  Iniciar(c2,6,1)
+  Iniciar(c3,8,1)
+  Iniciar(c4,10,1)
+  Iniciar(cc,1,1)
+
+fin

@@ -1,0 +1,106 @@
+programa ej01
+procesos
+
+  proceso limpiarFlores
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+  fin
+  
+  proceso limpiarPapeles
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+  fin
+
+  proceso DejarTodasLasFlores
+  comenzar
+    mientras HayFlorEnLaBolsa
+      depositarFlor
+  fin
+
+  proceso DejarTodosLosPapeles
+  comenzar
+    mientras HayPapelEnLaBolsa
+      depositarPapel
+  fin
+
+areas
+  AreaFlo: AreaPC(1,1,5,10)
+  AreaPa: AreaPC(6,1,10,9)
+  AreaDeposito: AreaC(10,10,10,10)
+  AreaInicio: AreaC(6,10,9,10)
+
+robots
+  robot florero
+  variables
+    Ca: numero
+    Ca_or: numero
+    Av: numero
+    Av_or: numero
+  comenzar
+    Ca_or := PosCa
+    Av_or := PosAv
+    repetir 5
+      Random(Ca,1,10)
+      Random(Av,1,5)
+      BloquearEsquina(Av,Ca)
+      Pos(Av,Ca)
+      limpiarFlores
+      Pos(Av_or,Ca_or)
+      LiberarEsquina(Av,Ca)
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    DejarTodasLasFlores
+    Pos(Av_or, Ca_or)
+    LiberarEsquina(10,10)
+  fin
+
+  robot papelero
+  variables
+    Ca: numero
+    Ca_or: numero
+    Av: numero
+    Av_or: numero
+  comenzar
+    Ca_or := PosCa
+    Av_or := PosAv
+    repetir 3
+      Random(Ca,1,9)
+      Random(Av,6,10)
+      BloquearEsquina(Av,Ca)
+      Pos(Av,Ca)
+      limpiarPapeles
+      Pos(Av_or,Ca_or)
+      LiberarEsquina(Av,Ca)
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    DejarTodosLosPapeles
+    Pos(Av_or, Ca_or)
+    LiberarEsquina(10,10)   
+  fin
+
+
+variables
+  F1: florero
+  F2: florero
+  P1: papelero
+  P2: papelero
+comenzar
+  AsignarArea(F1, AreaFlo)
+  AsignarArea(F2, AreaFlo)
+  AsignarArea(P1, AreaPa)
+  AsignarArea(P2, AreaPa)
+  AsignarArea(F1, AreaDeposito)
+  AsignarArea(F2, AreaDeposito)
+  AsignarArea(P1, AreaDeposito)
+  AsignarArea(P2, AreaDeposito)
+  AsignarArea(F1, AreaInicio)
+  AsignarArea(F2, AreaInicio)
+  AsignarArea(P1, AreaInicio)
+  AsignarArea(P2, AreaInicio)
+  Iniciar(F1,6,10)
+  Iniciar(F2,7,10)
+  Iniciar(P1,8,10)
+  Iniciar(P2,9,10)
+fin

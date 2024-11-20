@@ -1,0 +1,78 @@
+programa Ej04
+areas
+  inicio: AreaC(9,9,9,12)
+  recorrido: AreaPC(10,10,11,11)
+  areaCoord: AreaP(1,1,1,1)
+robots
+  robot florero
+  variables
+    id : numero
+    av_or: numero
+    ca_or: numero
+    sigo: boolean
+  comenzar
+    av_or := PosAv
+    ca_or := PosCa
+    sigo := V
+    RecibirMensaje(id,coordinador)
+    mientras sigo
+      BloquearEsquina(10,10)
+      Pos(10,10)
+      si HayFlorEnLaEsquina
+        tomarFlor
+        BloquearEsquina(11,11)
+        Pos(11,11)
+        LiberarEsquina(10,10)
+        si HayFlorEnLaBolsa
+          depositarFlor
+        Pos(av_or,ca_or)
+        LiberarEsquina(11,11)
+      sino
+        Pos(av_or,ca_or)
+        LiberarEsquina(10,10)
+        sigo := F
+      Pos(av_or,ca_or)
+    EnviarMensaje(id, coordinador)
+  fin
+
+  robot coor
+  variables
+    ultimo: numero
+  comenzar
+    EnviarMensaje(1,f1)
+    EnviarMensaje(2,f2)
+    EnviarMensaje(3,f3)
+    EnviarMensaje(4,f4)
+    repetir 4
+      RecibirMensaje(ultimo,*)
+    Informar(ultimo)
+    Pos(11,11)
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+  fin
+
+  
+variables
+  f1: florero
+  f2: florero 
+  f3: florero 
+  f4: florero 
+  coordinador: coor
+comenzar
+  AsignarArea(f1, inicio)
+  AsignarArea(f2, inicio)
+  AsignarArea(f3, inicio)
+  AsignarArea(f4, inicio)
+  AsignarArea(coordinador, areaCoord)
+  AsignarArea(f1,recorrido)
+  AsignarArea(f2,recorrido)
+  AsignarArea(f3,recorrido)
+  AsignarArea(f4,recorrido)
+  AsignarArea(coordinador,recorrido)
+
+  Iniciar(f1,9,9)
+  Iniciar(f2,9,10)
+  Iniciar(f3,9,11)
+  Iniciar(f4,9,12)
+  Iniciar(coordinador,1,1)
+fin

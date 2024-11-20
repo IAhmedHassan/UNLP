@@ -1,0 +1,108 @@
+{NO TERMINADO}
+programa Ej03
+areas
+  inicio: AreaC(1,1,5,1)
+  cuadrante: AreaPC(2,2,10,10)
+robots
+  robot recogedor
+  variables
+    quienSoy: numero
+    cantFlores: numero
+    avOr: numero
+    caOr: numero
+    av: numero
+    ca: numero
+    sigo: boolean
+  comenzar
+    caOr := PosCa
+    avOr := PosAv
+    cantFlores := 0
+    RecibirMensaje(quienSoy,r5)
+    RecibirMensaje(av,r5)
+    RecibirMensaje(ca,r5)
+    sigo := V
+    mientras sigo
+      BloquearEsquina(av,ca)
+      Pos(av,ca)
+      si HayFlorEnLaEsquina
+        tomarFlor
+        cantFlores := cantFlores + 1
+      sino
+        sigo := F
+      Pos(avOr,caOr)
+      LiberarEsquina(av,ca)
+    EnviarMensaje(quienSoy,r5)
+    EnviarMensaje(cantFlores,r5)
+  fin
+
+  robot jefe
+  variables
+    rAct: numero
+    floresAct: numero
+    rMax: numero
+    floresMax: numero
+    Av: numero
+    Ca: numero
+    sigo: boolean
+  comenzar
+    rMax := 0
+    floresMax := -1
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+    Random(Av, 2,10)
+    Random(Ca, 2,10)
+    EnviarMensaje(Av,r1)
+    EnviarMensaje(Av,r2)
+    EnviarMensaje(Av,r3)
+    EnviarMensaje(Av,r4)
+    EnviarMensaje(Ca,r1)
+    EnviarMensaje(Ca,r2)
+    EnviarMensaje(Ca,r3)
+    EnviarMensaje(Ca,r4)
+
+    repetir 4
+      RecibirMensaje(rAct, *)
+      si rAct = 1
+        RecibirMensaje(floresAct,r1)
+      sino
+        si rAct = 2
+          RecibirMensaje(floresAct,r2)
+        sino
+          si rAct = 3
+            RecibirMensaje(floresAct,r3)
+          sino
+            RecibirMensaje(floresAct,r4)
+      si floresAct > floresMax
+        floresMax := floresAct
+        rMax := rAct
+      
+    Informar(rMax)
+  
+  fin
+
+
+variables
+  r1: recogedor
+  r2: recogedor
+  r3: recogedor
+  r4: recogedor
+  r5: jefe
+comenzar
+  AsignarArea(r1,inicio)
+  AsignarArea(r2,inicio)
+  AsignarArea(r3,inicio)
+  AsignarArea(r4,inicio)
+  AsignarArea(r5,inicio)
+  AsignarArea(r1,cuadrante)
+  AsignarArea(r2,cuadrante)
+  AsignarArea(r3,cuadrante)
+  AsignarArea(r4,cuadrante)
+
+  Iniciar(r1,2,1)
+  Iniciar(r2,3,1)
+  Iniciar(r3,4,1)
+  Iniciar(r4,5,1)
+  Iniciar(r5,1,1)
+fin

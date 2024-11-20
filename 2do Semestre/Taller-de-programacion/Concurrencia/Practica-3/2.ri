@@ -1,0 +1,127 @@
+programa Ej02
+procesos
+  proceso limpiarFlores(ES cantFlores)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantFlores := cantFlores + 1
+  fin
+
+  proceso limpiarPapeles(ES cantPapeles)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+  fin
+
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+
+  proceso recorrerEscalonFlo(ES escalon, cantFlores)
+  comenzar
+    repetir escalon
+      mover
+    limpiarFlores
+    derecha
+    repetir escalon
+      mover
+    limpiarFlores
+    izquierda
+  fin
+
+  proceso recorrerEscalonPap(ES escalon, cantPapeles)
+  comenzar
+    repetir escalon
+      mover
+    limpiarPapeles(cantPapeles)
+    izquierda
+    repetir escalon
+      mover
+    limpiarPapeles(cantPapeles)
+    derecha
+  fin
+
+areas
+  AreaFlo: AreaP(1,1,14,15)
+  AreaPa: AreaP(16,1,31,31)
+  AreaFiscal: AreaP(15,1,15,1)
+  centro: AreaPC(16,16,16,16)
+robots
+  robot r1
+  variables
+    escalon: numero
+    cantF: numero
+  comenzar
+    escalon := 5
+    cantF := 0
+    repetir 4
+      recorrerEscalonFlo(escalon, cantF)
+      escalon := escalon - 1
+    mover
+    derecha
+    BloquearEsquina(16,16)
+    mover
+    EnviarMensaje(1, fiscal)
+    repetir 2
+      derecha
+    mover
+    LiberarEsquina(16,16)
+    repetir 4
+      recorrerEscalonFlo(escalon, cantF)
+      escalon := escalon + 1
+    Informar(cantF)
+  fin
+
+  robot r2
+  variables
+    escalon: numero
+    cantP: numero
+  comenzar
+    escalon := 5
+    cantP := 0
+    repetir 4
+      recorrerEscalonPap(escalon, cantP)
+      escalon := escalon - 1
+    mover
+    izquierda
+    BloquearEsquina(16,16)
+    mover
+    EnviarMensaje(2,fiscal)
+    repetir 2
+      derecha
+    mover
+    LiberarEsquina(16,16)
+    repetir 4
+      recorrerEscalonPap(escalon, cantP)
+      escalon := escalon + 1
+    Informar(cantP)
+  fin
+
+  robot fiscal
+  variables
+    ganador: numero
+    yaGanoAlguien: boolean
+  comenzar
+    repetir 2
+      RecibirMensaje(ganador, *)
+      Informar(ganador)
+      RecibirMensaje(ganador, *)
+  fin
+
+variables
+  RFlo: r1
+  RPap: r2
+  fiscal: fiscal
+comenzar
+  AsignarArea(RFlo, AreaFlo)
+  AsignarArea(Rpap, AreaPa)
+  AsignarArea(fiscal, AreaFiscal)
+  AsignarArea(RFlo,centro)
+  AsignarArea(RPap,centro)
+  Iniciar(Rflo,1,1)
+  Iniciar(RPap,31,1)
+  Iniciar(fiscal,15,1)
+fin
