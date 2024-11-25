@@ -3,10 +3,10 @@ procesos
 
   proceso buscarPapel(ES sigo : boolean)
   variables
-    Ca: numero
+    calleActual: numero
     Av: numero
   comenzar
-    Ca := PosCa
+    calleActual := PosCa
     Av := PosAv
     BloquearEsquina(11,11)
     Pos(11,11)
@@ -15,7 +15,7 @@ procesos
       sigo := V
     sino
       sigo := F
-    Pos(Av,Ca)
+    Pos(Av,calleActual)
     LiberarEsquina(11,11)
   fin
 
@@ -32,6 +32,7 @@ robots
   variables
     id : numero
     sigo: boolean
+    calleFinal: numero
   comenzar
     sigo := V
     RecibirMensaje(id, cc)
@@ -42,15 +43,16 @@ robots
       mover
       buscarPapel(sigo)
     EnviarMensaje(id,cc)
-    EnviarMensaje(PosCa, cc)
+    calleFinal := PosCa
+    EnviarMensaje(calleFinal, cc)
   fin
 
   robot coordinador
   variables
-    c: numero
-    cMax: numero
-    ca: numero
-    caMax: numero
+    idCorredor: numero
+    idCorredorMax: numero
+    calleActual: numero
+    calleActualMax: numero
   comenzar
     EnviarMensaje(1,c1)
     EnviarMensaje(2,c2)
@@ -58,21 +60,21 @@ robots
     EnviarMensaje(4,c4)
 
     repetir 4
-      RecibirMensaje(c, *)
-      si c = 1
-        RecibirMensaje(ca,c1)
+      RecibirMensaje(idCorredor, *)
+      si idCorredor = 1
+        RecibirMensaje(calleActual,c1)
       sino
-        si c = 2
-          RecibirMensaje(ca,c2)
+        si idCorredor = 2
+          RecibirMensaje(calleActual,c2)
         sino
-          si c = 3
-            RecibirMensaje(ca,c3)
+          si idCorredor = 3
+            RecibirMensaje(calleActual,c3)
           sino
-            RecibirMensaje(ca,c4)
-      si ca > caMax
-        caMax := ca
-        cMax := c1
-    Informar(cMax)
+            RecibirMensaje(calleActual,c4)
+      si calleActual > calleActualMax
+        calleActualMax := calleActual
+        idCorredorMax := idCorredor
+    Informar(idCorredorMax)
   fin
 
 

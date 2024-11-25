@@ -1,0 +1,147 @@
+programa Ej06
+procesos
+  proceso limpiarFlores
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+  fin
+
+  proceso limpiarPapeles
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+  fin
+
+  proceso depositar
+  comenzar
+    si HayFlorEnLaBolsa
+      depositarFlor
+    si HayPapelEnLaBolsa
+      depositarPapel
+  fin
+
+  proceso avanzarEnCuadrante(E lado : numero)
+  variables
+    calle,calleSig,avenida,avenidaSig: numero
+  comenzar
+    calle := PosCa
+    avenida := PosAv
+
+    {Calcula la próxima posición}
+    si lado = 1
+      calleSig := calle + 1
+    si lado = 2
+      avenidaSig := avenida + 1
+    si lado = 3
+      calleSig := calle - 1
+    si lado = 4
+      avenidaSig := avenida + 1
+    
+    BloquearEsquina(avenidaSig,calleSig)
+    mover
+    LiberarEsquina(avenida,calle)
+  fin
+
+
+  proceso Cuadrante(E tamaño : numero; E DJFlores : boolean; E DJPapeles : boolean)
+  variables
+  calle, calleSig, avenida, avenidaSig, lado : numero
+  comenzar
+    calle := PosCa
+    calleSig := PosCa + 1
+    avenida := PosAv 
+    avenidaSig := PosAv + 1
+    lado := 1
+    repetir 4
+      repetir lado
+        si DJFlores
+          limpiarFlores
+        si DJPapeles
+          limpiarPapeles
+        avanzarEnCuadrante(lado,calle,avenida)
+      derecha
+      lado := lado + 1
+    
+  fin
+
+  proceso depositarEnCalle(E calle : numero)
+  comenzar
+    Pos(1,calle)
+    derecha
+    mientras ((HayFlorEnLaBolsa | HayPapelEnLaBolsa) & (PosCa < 100))
+      depositar
+      mover
+    depositar
+  fin
+    
+
+
+areas
+  ciudad: AreaC(1,1,100,100)
+robots
+  robot recolector
+  variables
+    debeJuntarFlores: boolean
+    debeJuntarPapeles: boolean
+    tamCuadrante: numero
+    calle: numero
+  comenzar
+    BloquearEsquina(PosAv,PosCa)
+    RecibirMensaje(tamCuadrante,r4)
+    RecibirMensaje(debeJuntarFlores,r4)
+    RecibirMensaje(debeJuntarPapeles,r4)
+    Cuadrante(tamCuadrante,debeJuntarFlores,debeJuntarPapeles)
+    EnviarMensaje(tamCuadrante,r4)
+    RecibirMensaje(calle, r4)
+    depositarEnCalle(calle)
+
+  fin
+
+  robot fiscalizador
+  variables
+    id: numero
+    calleSig: numero
+  comenzar
+    {tam cuadrante}
+    EnviarMensaje(6,r1)
+    EnviarMensaje(10,r2)
+    EnviarMensaje(7,r3)
+    {debe juntar flores}
+    EnviarMensaje(V,r1)
+    EnviarMensaje(V,r2)
+    EnviarMensaje(F,r3)
+    {debe juntar papeles}
+    EnviarMensaje(F,r1)
+    EnviarMensaje(V,r2)
+    EnviarMensaje(V,r3)
+
+    calleSig := 20
+    repetir 3
+      {recibe el tamaño del cuadrante de cada robot,
+      que como es unico para cada uno tambien funciona como identificador}
+      RecibirMensaje(id,*)
+      si id = 6
+        EnviarMensaje(calleSig, r1)
+      sino
+        si id = 10
+          EnviarMensaje(calleSig, r2)
+        sino
+          EnviarMensaje(calleSig, r3)
+      calleSig := calleSig + 1
+  fin
+variables
+  r1: recolector
+  r2: recolector
+  r3: recolector
+  r4: fiscalizador
+comenzar
+  AsignarArea(r1,ciudad)
+  AsignarArea(r2,ciudad)
+  AsignarArea(r3,ciudad)
+  AsignarArea(r4,ciudad)
+  
+  Iniciar(r1,2,2)
+  Iniciar(r2,5,5)
+  Iniciar(r3,9,9)
+  Iniciar(r4,1,1)
+fin

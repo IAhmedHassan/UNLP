@@ -1,0 +1,44 @@
+programa 
+areas
+  ciudad: AreaC(4,1,100,100)
+  av1: AreaPC(1,1,1,100)
+  av2: AreaPC(2,1,2,100)
+  av3: AreaPC(3,1,3,100)
+robots
+  robot Servidor
+  variables
+    ID: numero
+    cantFlores: numero
+  comenzar
+    EnviarMensaje(1,R1)
+    EnviarMensaje(2,R2)
+    EnviarMensaje(3,R3)
+
+    RecibirMensaje(ID, *)
+    si ID
+
+  fin
+
+  robot Cliente
+  variables
+    ID: numero
+    cantFlores: numero
+  comenzar
+    RecibirMensaje(ID,R0)
+
+    mientras (PosCa < 100)
+      Random(flores,1,4)
+      EnviarMensaje(ID,R0)
+      EnviarMensaje(cantFlores,R0)
+      EnviarMensaje(PosAv)
+      EnviarMensaje(PosCa + 1)
+
+  fin
+
+variables
+  R0: Servidor
+  Rinfo: robot1
+comenzar
+  AsignarArea(Rinfo,ciudad)
+  Iniciar(Rinfo,1,1)
+fin
