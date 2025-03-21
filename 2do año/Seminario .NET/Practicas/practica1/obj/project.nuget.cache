@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "8A+KFREGUPY=",
+  "success": true,
+  "projectFilePath": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica1/practica1.csproj",
+  "expectedPackageFiles": [
+    "/home/pelo/.nuget/packages/microsoft.netcore.app.ref/8.0.13/microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
+    "/home/pelo/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.13/microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512",
+    "/home/pelo/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.13/microsoft.netcore.app.host.linux-x64.8.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
