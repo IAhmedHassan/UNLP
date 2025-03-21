@@ -14,9 +14,9 @@ Repositorio de apuntes y avance por la carrera de <a href="https://www.info.unlp
 <li><a href="https://github.com/IAhmedHassan/UNLP/tree/master/1er%20Semestre/CADP">(SI106) Conceptos de Algoritmos, Datos y Programas</a></li>
 
 <li><a href="https://github.com/IAhmedHassan/UNLP/tree/master/2do%20Semestre/Taller-de-programacion">(SI107) Taller de Programación</a></li>
-</ul>
 
-En esto estoy trabajando ahora:
-<ul>
-<li><a href="https://github.com/IAhmedHassan/UNLP/tree/master/2do%20Semestre/Taller-de-programacion/Objetos/Main/TP_ProyectoAlumnos/src">TdP: Objetos</a></li>
+<li><a href="https://github.com/IAhmedHassan/UNLP/tree/master/2do%20a%C3%B1o/Seminario%20.NET">(SI207) Seminario de Lenguajes - .NET</a></li>
+
+<li><a href="https://github.com/IAhmedHassan/UNLP/tree/master/2do%20a%C3%B1o/Fundamentos%20de%20Organizaci%C3%B3n%20de%20Datos">(SI209) Fundamentos de Organización de Datos</a></li>
+
 </ul>
