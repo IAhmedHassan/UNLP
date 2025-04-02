@@ -1,0 +1,14 @@
+/home/pelo/dev/dotNET/teoria1/bin/Debug/net9.0/teoria1
+/home/pelo/dev/dotNET/teoria1/bin/Debug/net9.0/teoria1.deps.json
+/home/pelo/dev/dotNET/teoria1/bin/Debug/net9.0/teoria1.runtimeconfig.json
+/home/pelo/dev/dotNET/teoria1/bin/Debug/net9.0/teoria1.dll
+/home/pelo/dev/dotNET/teoria1/bin/Debug/net9.0/teoria1.pdb
+/home/pelo/dev/dotNET/teoria1/obj/Debug/net9.0/teoria1.GeneratedMSBuildEditorConfig.editorconfig
+/home/pelo/dev/dotNET/teoria1/obj/Debug/net9.0/teoria1.AssemblyInfoInputs.cache
+/home/pelo/dev/dotNET/teoria1/obj/Debug/net9.0/teoria1.AssemblyInfo.cs
+/home/pelo/dev/dotNET/teoria1/obj/Debug/net9.0/teoria1.csproj.CoreCompileInputs.cache
+/home/pelo/dev/dotNET/teoria1/obj/Debug/net9.0/teoria1.dll
+/home/pelo/dev/dotNET/teoria1/obj/Debug/net9.0/refint/teoria1.dll
+/home/pelo/dev/dotNET/teoria1/obj/Debug/net9.0/teoria1.pdb
+/home/pelo/dev/dotNET/teoria1/obj/Debug/net9.0/teoria1.genruntimeconfig.cache
+/home/pelo/dev/dotNET/teoria1/obj/Debug/net9.0/ref/teoria1.dll

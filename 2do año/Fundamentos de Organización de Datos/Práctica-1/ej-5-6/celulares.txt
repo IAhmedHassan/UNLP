@@ -1,0 +1,48 @@
+5 1000 Xiaomi
+10 3 alto telefono vieja
+mi 8 lite
+12 1500 Samsung
+50 10 Smartphone de gama media
+Galaxy A12
+3 2000 Apple
+30 5 Smartphone de alta gama
+iPhone 13
+8 800 Motorola
+100 20 Teléfono económico
+Moto G Power
+15 1200 Xiaomi
+75 15 Teléfono con buena relación calidad-precio
+Redmi Note 10
+1 1000 Huawei
+40 8 Teléfono con excelente cámara
+P30 Lite
+7 1800 OnePlus
+25 7 Teléfono rápido y eficiente
+OnePlus Nord
+10 900 Nokia
+60 12 Teléfono resistente
+Nokia 3310
+55 1100 LG
+35 10 Teléfono con buena pantalla
+LG Velvet
+14 1300 Sony
+20 5 Teléfono con buen sonido
+Xperia 5
+2 1700 Google
+15 4 Teléfono con Android puro
+Pixel 6
+9 1400 Oppo
+45 9 Teléfono con diseño innovador
+Oppo Reno 6
+6 1600 Vivo
+50 10 Teléfono con buena cámara frontal
+Vivo V21
+4 1900 Realme
+30 6 Teléfono con buena batería
+Realme 8 Pro
+11 1200 Asus
+40 8 Teléfono para gaming
+ROG Phone 5
+13 1000 ZTE
+20 5 Teléfono económico y funcional
+ZTE Blade A7
