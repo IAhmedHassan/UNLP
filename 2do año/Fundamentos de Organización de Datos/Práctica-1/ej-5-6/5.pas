@@ -77,7 +77,7 @@ end;
 {------------------------------------------------------------------------}
   
 procedure crearArchivo(var fcel : celus);
-var tf : Text; c : celular; buff : string[1];
+var tf : Text; c : celular; buff : string[1]; { ACA GABI }
 begin
   assign(tf, 'celulares.txt');
   reset(tf);
