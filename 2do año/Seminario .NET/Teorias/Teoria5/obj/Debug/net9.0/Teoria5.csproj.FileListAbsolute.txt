@@ -1,0 +1,15 @@
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/obj/Debug/net9.0/Teoria5.GeneratedMSBuildEditorConfig.editorconfig
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/obj/Debug/net9.0/Teoria5.AssemblyInfoInputs.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/obj/Debug/net9.0/Teoria5.AssemblyInfo.cs
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/obj/Debug/net9.0/Teoria5.csproj.CoreCompileInputs.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/obj/Debug/net9.0/Teoria5.sourcelink.json
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/bin/Debug/net9.0/Teoria5
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/bin/Debug/net9.0/Teoria5.deps.json
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/bin/Debug/net9.0/Teoria5.runtimeconfig.json
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/bin/Debug/net9.0/Teoria5.dll
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/bin/Debug/net9.0/Teoria5.pdb
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/obj/Debug/net9.0/Teoria5.dll
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/obj/Debug/net9.0/refint/Teoria5.dll
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/obj/Debug/net9.0/Teoria5.pdb
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/obj/Debug/net9.0/Teoria5.genruntimeconfig.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria5/obj/Debug/net9.0/ref/Teoria5.dll
