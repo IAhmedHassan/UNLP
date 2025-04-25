@@ -1,0 +1,15 @@
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/obj/Debug/net9.0/practica-5.GeneratedMSBuildEditorConfig.editorconfig
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/obj/Debug/net9.0/practica-5.AssemblyInfoInputs.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/obj/Debug/net9.0/practica-5.AssemblyInfo.cs
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/obj/Debug/net9.0/practica-5.csproj.CoreCompileInputs.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/obj/Debug/net9.0/practica-5.sourcelink.json
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/bin/Debug/net9.0/practica-5
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/bin/Debug/net9.0/practica-5.deps.json
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/bin/Debug/net9.0/practica-5.runtimeconfig.json
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/bin/Debug/net9.0/practica-5.dll
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/bin/Debug/net9.0/practica-5.pdb
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/obj/Debug/net9.0/practica-5.dll
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/obj/Debug/net9.0/refint/practica-5.dll
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/obj/Debug/net9.0/practica-5.pdb
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/obj/Debug/net9.0/practica-5.genruntimeconfig.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Practicas/practica-5/obj/Debug/net9.0/ref/practica-5.dll
