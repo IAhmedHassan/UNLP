@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario Interactivo - C# Teoría 7</title>
+    <style>
+        /* Estilos CSS (igual que la versión anterior) */
+         body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        #quiz-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #5a2d7d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #question-container {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        #question-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        #options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #options-list li {
+            margin-bottom: 12px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+         #options-list li:hover {
+            background-color: #f0e6f7;
+         }
+
+        #options-list input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+         #options-list label {
+             cursor: pointer;
+             display: inline;
+             vertical-align: middle;
+         }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            margin-top: 20px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #8a4dbf;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #5a2d7d;
+        }
+         button:disabled {
+             background-color: #cccccc;
+             cursor: not-allowed;
+         }
+
+        #feedback-container {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .feedback-correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback-incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .feedback-explanation {
+            margin-top: 10px;
+            font-weight: normal;
+            font-style: italic;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+        }
+        .feedback-explanation a {
+            color: #5a2d7d;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+         .feedback-explanation a:hover {
+             color: #8a4dbf;
+         }
+
+
+        #score-container {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e9dff0;
+            border-radius: 8px;
+        }
+         #score-container p {
+             font-size: 1.2em;
+         }
+         #score {
+            font-weight: bold;
+            color: #5a2d7d;
+         }
+         #total-questions {
+             font-weight: bold;
+         }
+         #restart-btn {
+             width: auto;
+             display: inline-block;
+             padding: 10px 30px;
+         }
+    </style>
+</head>
+<body>
+
+    <div id="quiz-container">
+        <h1>Cuestionario Interactivo - C# Teoría 7</h1>
+
+        <div id="question-container">
+            <p id="question-number"></p>
+            <p id="question-text"></p>
+            <ul id="options-list">
+                <!-- Las opciones se cargarán aquí con JS -->
+            </ul>
+        </div>
+
+        <button id="submit-btn">Verificar Respuesta</button>
+
+        <div id="feedback-container" style="display: none;">
+             <p id="feedback-result"></p>
+             <!-- Usaremos innerHTML para este elemento -->
+            <p id="feedback-explanation" class="feedback-explanation"></p>
+        </div>
+
+        <button id="next-btn" style="display: none;">Siguiente Pregunta</button> <!-- Texto se cambiará dinámicamente -->
+
+        <div id="score-container" style="display: none;">
+            <h2>Resultado Final</h2>
+            <p>Tu puntuación: <span id="score">0</span> / <span id="total-questions">0</span></p>
+            <button id="restart-btn">Reiniciar Cuestionario</button>
+        </div>
+    </div>
+
+    <script>
+        // <<<--- Nombre del archivo PDF para esta teoría
+        const pdfFileName = '07 Teoria y Practica 2025.pdf';
+        // <<<--- Asegúrate de que este archivo PDF esté en la misma carpeta que este archivo HTML
+
+        // <<<--- Datos del cuestionario para Teoría 7
+        const quizData = [
+            {
+                question: "Según la teoría, ¿qué es fundamentalmente una interfaz en C#?",
+                options: [
+                    "Una clase base de la cual todas las demás clases deben heredar.",
+                    "Un tipo de referencia que especifica un conjunto de funciones sin implementarlas (o con implementación predeterminada).",
+                    "Un tipo de valor utilizado para almacenar colecciones de objetos.",
+                    "Una clase estática que solo contiene métodos de extensión."
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: La página 14 define una interfaz como un tipo de referencia que especifica un conjunto de funciones (métodos, propiedades, etc.) sin implementarlas obligatoriamente."
+            },
+            {
+                question: "Si una clase implementa una interfaz, ¿qué obligación adquiere respecto a los miembros de la interfaz (que no tienen implementación predeterminada)?",
+                options: [
+                    "Puede elegir implementar solo los miembros que necesite.",
+                    "Debe implementar todos los miembros de la interfaz.",
+                    "Debe marcar los miembros implementados con la palabra clave virtual.",
+                    "Solo necesita implementar los métodos, no las propiedades o indizadores."
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: La página 18 establece que una clase que implementa una interfaz \"debe implementar todos los miembros de la interfaz que no tienen implementación predeterminada\". Es un contrato."
+            },
+            {
+                question: "Al declarar una clase que hereda de una clase base y también implementa una o más interfaces, ¿cuál debe aparecer primero en la lista después de los dos puntos (:)?",
+                options: [
+                    "Cualquiera de las interfaces.",
+                    "La clase base.",
+                    "El orden no importa.",
+                    "La interfaz IDisposable si se implementa."
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: La página 18 indica que si una clase deriva de otra clase y también implementa interfaces, \"la clase [base] debe ser la primera en la lista después de los dos puntos\"."
+            },
+            {
+                question: "¿Es posible crear una instancia directamente de un tipo interfaz usando new? (Ej: IImprimible imp = new IImprimible();)",
+                options: [
+                    "Sí, siempre que la interfaz tenga una implementación predeterminada para todos sus miembros.",
+                    "Sí, pero solo si la interfaz no define ningún miembro.",
+                    "No, no es posible crear una instancia directamente de una interfaz.",
+                    "Sí, pero solo dentro de una clase estática."
+                ],
+                correctAnswer: 2, // Índice c)
+                feedback: "Respuesta Correcta: c)\nFeedback: La página 23 afirma explícitamente que \"No es posible crear una instancia de una interface\". Se pueden crear variables de tipo interfaz, pero deben apuntar a un objeto de una clase que implemente esa interfaz."
+            },
+            {
+                question: "¿Cuál es el propósito principal de la interfaz System.IDisposable?",
+                options: [
+                    "Permitir que los objetos sean serializados a un archivo.",
+                    "Proporcionar un mecanismo determinista para liberar recursos no administrados.",
+                    "Habilitar el polimorfismo entre diferentes jerarquías de clases.",
+                    "Marcar clases que solo pueden tener una instancia (Singleton)."
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: Las páginas 46, 47 y 48 explican que IDisposable define un mecanismo determinista (el método Dispose()) para liberar recursos externos o no administrados, siendo la alternativa recomendada a los finalizadores."
+            },
+            {
+                question: "¿Qué hace la instrucción using (StreamReader sr = new StreamReader(\"file.txt\")) { ... }?",
+                options: [
+                    "Importa el espacio de nombres System.IO.",
+                    "Asegura que el método sr.Dispose() será llamado automáticamente al salir del bloque using, incluso si ocurren excepciones.",
+                    "Declara una variable sr que solo puede ser usada dentro de ese bloque.",
+                    "Convierte el archivo file.txt a un stream de memoria."
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: Las páginas 49 y 50 explican que la instrucción using garantiza la llamada al método Dispose() del objeto declarado (que debe implementar IDisposable) al finalizar el bloque, simplificando la gestión de recursos comparado con un try/finally."
+            },
+             {
+                 question: "¿Qué es una \"declaración using\" introducida en C# 8.0 (ej: using StreamReader sr = new StreamReader(\"f.txt\");)?",
+                 options: [
+                     "Una forma abreviada de declarar un método de extensión.",
+                     "Una declaración de variable precedida por using, donde Dispose() se llamará al final del ámbito de inclusión.",
+                     "Una directiva para indicar que el archivo solo se usará para lectura.",
+                     "Una forma de crear un alias para un tipo complejo."
+                 ],
+                 correctAnswer: 1, // Índice b)
+                 feedback: "Respuesta Correcta: b)\nFeedback: La página 52 introduce la declaración using como una sintaxis más limpia donde la variable declarada será \"dispuesta\" (se llamará a Dispose()) cuando salga del ámbito donde fue declarada."
+             },
+             {
+                 question: "¿Cuál es la idea central del Principio de Inversión de Dependencias (DIP)?",
+                 options: [
+                     "Las clases deben depender directamente de otras clases concretas para mayor eficiencia.",
+                     "Las clases de bajo nivel deben depender de las clases de alto nivel.",
+                     "Las clases de alto nivel deben depender de abstracciones (interfaces o clases abstractas), no de implementaciones concretas.",
+                     "Las interfaces deben depender de las clases que las implementan."
+                 ],
+                 correctAnswer: 2, // Índice c)
+                 feedback: "Respuesta Correcta: c)\nFeedback: Las páginas 56 y 57 reinterpretan el DIP en POO indicando que las clases (especialmente las de alto nivel con lógica de negocio) no deben depender de clases concretas de menor nivel, sino de abstracciones."
+             },
+             {
+                 question: "En el patrón de Inyección de Dependencias (DI) por constructor, ¿cómo recibe una clase (ej: Calculador) la dependencia que necesita (ej: una instancia de ILogger)?",
+                 options: [
+                     "Creando una nueva instancia de la clase concreta (new Logger()) dentro de sí misma.",
+                     "Recibiendo la instancia de la dependencia como un parámetro en su constructor.",
+                     "Heredando directamente de la clase de la dependencia.",
+                     "Usando un método estático para obtener una instancia global de la dependencia."
+                 ],
+                 correctAnswer: 1, // Índice b)
+                 feedback: "Respuesta Correcta: b)\nFeedback: Las páginas 72 y 73 muestran la implementación de la inyección por constructor, donde la dependencia (un objeto que implementa ILogger) se pasa como argumento al constructor de la clase Calculador."
+             },
+             {
+                 question: "¿Cuál es uno de los principales beneficios de aplicar DIP y DI?",
+                 options: [
+                     "Reducir el número total de clases en el proyecto.",
+                     "Aumentar el acoplamiento entre las clases para mejorar el rendimiento.",
+                     "Facilitar el reemplazo de una implementación concreta por otra (desacoplamiento o acoplamiento débil).",
+                     "Eliminar la necesidad de usar interfaces."
+                 ],
+                 correctAnswer: 2, // Índice c)
+                 feedback: "Respuesta Correcta: c)\nFeedback: Las páginas 77, 79, 81 y 82-84 destacan que aplicar estos principios favorece el acoplamiento débil, lo que hace más fácil modificar o reemplazar módulos (como cambiar Logger por LoggerArchivo) sin afectar a las clases que dependen de la abstracción (ILogger)."
+             },
+             {
+                 question: "En la Arquitectura Limpia propuesta en la teoría, ¿cuál es la regla fundamental de dependencia entre las capas (Interfaz de Usuario, Repositorios, Aplicación)?",
+                 options: [
+                     "Todas las capas pueden depender entre sí libremente.",
+                     "Las capas internas (Aplicación) dependen de las capas externas (Interfaz de Usuario, Repositorios).",
+                     "Las capas externas (Interfaz de Usuario, Repositorios) dependen de las capas internas (Aplicación), pero no al revés.",
+                     "La capa de Repositorios depende de la Interfaz de Usuario."
+                 ],
+                 correctAnswer: 2, // Índice c)
+                 feedback: "Respuesta Correcta: c)\nFeedback: Las páginas 88, 89 y 91 explican la regla de dependencia en la Arquitectura Limpia: las dependencias fluyen hacia adentro; el código en las capas internas no puede tener conocimiento (ni referencias directas) de las capas externas."
+             },
+             {
+                 question: "En el ejemplo de Arquitectura Limpia, ¿dónde se define la interfaz IRepositorioProducto?",
+                 options: [
+                     "En el proyecto Almacen.Consola (Interfaz de Usuario).",
+                     "En el proyecto Almacen.Repositorios (Infraestructura).",
+                     "En el proyecto Almacen.Aplicacion (Core/Lógica).",
+                     "En un proyecto separado llamado Almacen.Interfaces."
+                 ],
+                 correctAnswer: 2, // Índice c)
+                 feedback: "Respuesta Correcta: c)\nFeedback: La página 94 muestra que la interfaz IRepositorioProducto, que representa el contrato para la persistencia, se define en la capa de Aplicación. Esto permite que la lógica de negocio dependa de esta abstracción sin conocer la implementación concreta."
+             },
+             {
+                 question: "En el ejemplo de Arquitectura Limpia, ¿qué proyecto contiene la implementación concreta RepositorioProductoTXT?",
+                 options: [
+                     "Almacen.Consola",
+                     "Almacen.Repositorios",
+                     "Almacen.Aplicacion",
+                     "No se crea una implementación concreta, solo se usa la interfaz."
+                 ],
+                 correctAnswer: 1, // Índice b)
+                 feedback: "Respuesta Correcta: b)\nFeedback: La página 97 muestra que la clase RepositorioProductoTXT, que implementa IRepositorioProducto y maneja la escritura/lectura en archivo, reside en el proyecto Almacen.Repositorios, que representa la capa de infraestructura o detalles de implementación."
+             },
+             {
+                 question: "¿En qué capa o proyecto se realiza típicamente la \"configuración de las dependencias\", es decir, donde se decide qué implementación concreta (RepositorioProductoTXT) se usará para una interfaz (IRepositorioProducto) y se inyecta en los casos de uso?",
+                 options: [
+                     "En la capa de Aplicación (Almacen.Aplicacion).",
+                     "En la capa de Repositorios (Almacen.Repositorios).",
+                     "En el punto de entrada de la aplicación (ej: Program.cs en Almacen.Consola).",
+                     "En un archivo de configuración externo (appsettings.json)."
+                 ],
+                 correctAnswer: 2, // Índice c)
+                 feedback: "Respuesta Correcta: c)\nFeedback: Las páginas 99 y 76 (discusión sobre Program) muestran que la composición de objetos y la configuración de qué implementación concreta usar para cada interfaz se realiza en el punto de entrada de la aplicación (la capa más externa), que es responsable de \"armar\" el sistema."
+             },
+             {
+                 question: "¿Qué ventaja principal ofrece usar una clase ProductoValidador separada e inyectarla en AgregarProductoUseCase en lugar de poner la lógica de validación directamente dentro del caso de uso?",
+                 options: [
+                     "Mejora el rendimiento de la validación.",
+                     "Permite reutilizar la misma lógica de validación en otros casos de uso y facilita las pruebas unitarias del caso de uso sin la validación.",
+                     "Reduce el número de líneas de código totales.",
+                     "Es la única forma de manejar errores de validación."
+                 ],
+                 correctAnswer: 1, // Índice b)
+                 feedback: "Respuesta Correcta: b)\nFeedback: Aunque no se discute explícitamente en términos de beneficios, separar la validación (páginas 105-108) sigue el principio de responsabilidad única y facilita la reutilización de esa lógica de validación. Además, permite probar el AgregarProductoUseCase aisladamente, inyectando un validador \"falso\" (mock) si fuera necesario, lo cual es un beneficio clave del desacoplamiento logrado con DI."
+             }
+        ];
+
+        // Elementos del DOM (sin cambios)
+        const quizContainer = document.getElementById('quiz-container');
+        const questionContainer = document.getElementById('question-container');
+        const questionNumberEl = document.getElementById('question-number');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsListEl = document.getElementById('options-list');
+        const submitBtn = document.getElementById('submit-btn');
+        const feedbackContainer = document.getElementById('feedback-container');
+        const feedbackResultEl = document.getElementById('feedback-result');
+        const feedbackExplanationEl = document.getElementById('feedback-explanation');
+        const nextBtn = document.getElementById('next-btn');
+        const scoreContainer = document.getElementById('score-container');
+        const scoreEl = document.getElementById('score');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const restartBtn = document.getElementById('restart-btn');
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            feedbackContainer.style.display = 'none';
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'block';
+            submitBtn.disabled = false;
+            nextBtn.textContent = 'Siguiente Pregunta'; // Restablecer texto del botón
+
+            const currentQuestion = quizData[currentQuestionIndex];
+
+            questionNumberEl.textContent = `Pregunta ${currentQuestionIndex + 1} de ${quizData.length}`;
+            questionTextEl.textContent = currentQuestion.question;
+            optionsListEl.innerHTML = '';
+
+            currentQuestion.options.forEach((option, index) => {
+                const li = document.createElement('li');
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'option';
+                input.value = index;
+                input.id = `option${index}`;
+
+                const label = document.createElement('label');
+                const letterPrefix = String.fromCharCode(97 + index) + ') '; // a), b), c)...
+                label.textContent = letterPrefix + option;
+                label.htmlFor = `option${index}`;
+
+                li.appendChild(input);
+                li.appendChild(label);
+                optionsListEl.appendChild(li);
+            });
+        }
+
+        function checkAnswer() {
+            const selectedOptionInput = optionsListEl.querySelector('input[name="option"]:checked');
+
+            if (!selectedOptionInput) {
+                alert('Por favor, selecciona una respuesta.');
+                return;
+            }
+
+            const selectedAnswerIndex = parseInt(selectedOptionInput.value);
+            const currentQuestion = quizData[currentQuestionIndex];
+
+            // Procesar feedback para enlaces PDF
+            let feedbackText = currentQuestion.feedback;
+            const pageRegex = /(p[áa]gina[s]?\s*)(\d+([-\s,y]+\d+)*)/gi; // Modificado para capturar rangos y listas
+            let match;
+
+             if (typeof feedbackText.replaceAll === 'function') {
+                 feedbackText = feedbackText.replaceAll(pageRegex, (fullMatch, prefix, pageNums) => {
+                     // Tomamos solo el primer número para el enlace principal, aunque mencionemos todos
+                     const firstPageNum = pageNums.match(/\d+/)[0];
+                     const pdfUrl = `${pdfFileName}#page=${firstPageNum}`;
+                     // Mantenemos la lista/rango original en el texto del enlace
+                     return `${prefix}<a href="${pdfUrl}" target="_blank" title="Abrir PDF en página ${firstPageNum}">${pageNums}</a>`;
+                 });
+             } else {
+                  // Fallback para navegadores antiguos
+                  while ((match = pageRegex.exec(feedbackText)) !== null) {
+                     const fullMatch = match[0];
+                     const prefix = match[1];
+                     const pageNums = match[2];
+                     const firstPageNum = pageNums.match(/\d+/)[0];
+                     const pdfUrl = `${pdfFileName}#page=${firstPageNum}`;
+                     const pageLink = `${prefix}<a href="${pdfUrl}" target="_blank" title="Abrir PDF en página ${firstPageNum}">${pageNums}</a>`;
+                     feedbackText = feedbackText.replace(fullMatch, pageLink);
+                     pageRegex.lastIndex = 0; // Resetear para búsqueda global
+                  }
+             }
+
+
+            // Mostrar feedback
+            feedbackContainer.style.display = 'block';
+            feedbackExplanationEl.innerHTML = feedbackText; // Usar innerHTML para el enlace
+            feedbackContainer.classList.remove('feedback-correct', 'feedback-incorrect');
+
+            // Evaluar respuesta y actualizar UI
+            if (selectedAnswerIndex === currentQuestion.correctAnswer) {
+                score++;
+                feedbackResultEl.textContent = '¡Correcto!';
+                feedbackContainer.classList.add('feedback-correct');
+            } else {
+                 feedbackResultEl.textContent = 'Incorrecto.';
+                feedbackContainer.classList.add('feedback-incorrect');
+                 const correctLi = optionsListEl.children[currentQuestion.correctAnswer];
+                 if(correctLi) {
+                     correctLi.style.backgroundColor = '#d4edda';
+                     correctLi.style.fontWeight = 'bold';
+                 }
+            }
+
+            // Deshabilitar interacción post-respuesta
+            submitBtn.disabled = true;
+            submitBtn.style.display = 'none'; // Ocultar botón verificar
+            const radioButtons = optionsListEl.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(rb => rb.disabled = true);
+            const listItems = optionsListEl.querySelectorAll('li');
+            listItems.forEach(li => li.style.cursor = 'default');
+
+            // Mostrar el botón "Siguiente" o "Ver Resultados"
+            nextBtn.style.display = 'block';
+            if (currentQuestionIndex >= quizData.length - 1) { // Es la última pregunta
+                nextBtn.textContent = 'Ver Resultados Finales';
+            }
+        }
+
+        function nextQuestion() {
+            // Comprobar si estamos en la última pregunta ANTES de incrementar
+             if (currentQuestionIndex >= quizData.length - 1) {
+                 showResults(); // Si ya era la última, mostrar resultados
+                 return; // Salir de la función
+             }
+
+            // Si no es la última, incrementar índice y cargar siguiente
+             currentQuestionIndex++;
+             // Restablecer estilos antes de cargar la nueva pregunta
+             Array.from(optionsListEl.children).forEach(li => {
+                li.style.backgroundColor = '';
+                li.style.fontWeight = '';
+                li.style.cursor = 'pointer';
+            });
+             loadQuestion();
+        }
+
+         function showResults() {
+            questionContainer.style.display = 'none';
+            submitBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            feedbackContainer.style.display = 'none';
+            scoreContainer.style.display = 'block';
+            scoreEl.textContent = score;
+            totalQuestionsEl.textContent = quizData.length;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            scoreContainer.style.display = 'none';
+            questionContainer.style.display = 'block';
+             // Restablecer estilos al reiniciar
+             Array.from(optionsListEl.children).forEach(li => {
+                 li.style.backgroundColor = '';
+                 li.style.fontWeight = '';
+                 li.style.cursor = 'pointer';
+             });
+            loadQuestion(); // Esto ya restablece el texto del botón nextBtn
+        }
+
+        // Event Listeners
+        submitBtn.addEventListener('click', checkAnswer);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // Carga inicial
+        loadQuestion();
+
+    </script>
+
+</body>
+</html>

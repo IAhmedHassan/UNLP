@@ -1,0 +1,16 @@
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/bin/Debug/net8.0/CentroEventos.Repositorios.deps.json
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/bin/Debug/net8.0/CentroEventos.Repositorios.dll
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/bin/Debug/net8.0/CentroEventos.Repositorios.pdb
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/bin/Debug/net8.0/CentroEventos.Aplicacion.dll
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/bin/Debug/net8.0/CentroEventos.Aplicacion.pdb
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/obj/Debug/net8.0/CentroEventos.Repositorios.csproj.AssemblyReference.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/obj/Debug/net8.0/CentroEventos.Repositorios.GeneratedMSBuildEditorConfig.editorconfig
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/obj/Debug/net8.0/CentroEventos.Repositorios.AssemblyInfoInputs.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/obj/Debug/net8.0/CentroEventos.Repositorios.AssemblyInfo.cs
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/obj/Debug/net8.0/CentroEventos.Repositorios.csproj.CoreCompileInputs.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/obj/Debug/net8.0/CentroEventos.Repositorios.sourcelink.json
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/obj/Debug/net8.0/CentroEv.AF39A6CD.Up2Date
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/obj/Debug/net8.0/CentroEventos.Repositorios.dll
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/obj/Debug/net8.0/refint/CentroEventos.Repositorios.dll
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/obj/Debug/net8.0/CentroEventos.Repositorios.pdb
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.Repositorios/obj/Debug/net8.0/ref/CentroEventos.Repositorios.dll

@@ -1,0 +1,640 @@
+{
+  "Version": 1,
+  "Hash": "gvC4dGPhvtzlFRPravuzKRRTWTi5BOnBRC3CmTUPPrE=",
+  "Source": "CentroEventos.UI",
+  "BasePath": "_content/CentroEventos.UI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CentroEventos.UI/wwwroot",
+      "Source": "CentroEventos.UI",
+      "ContentRoot": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/",
+      "BasePath": "_content/CentroEventos.UI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/obj/Debug/net8.0/scopedcss/bundle/CentroEventos.UI.styles.css",
+      "SourceId": "CentroEventos.UI",
+      "SourceType": "Computed",
+      "ContentRoot": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/obj/Debug/net8.0/scopedcss/bundle/",
+      "BasePath": "_content/CentroEventos.UI",
+      "RelativePath": "CentroEventos.UI#[.{fingerprint}]?.styles.css",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ApplicationBundle",
+      "Fingerprint": "3z6vqs62lx",
+      "Integrity": "D1+qsT31TzkBnuGV0CtfiS3HU7O7p8o0knlI9nA7LZU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/obj/Debug/net8.0/scopedcss/bundle/CentroEventos.UI.styles.css"
+    },
+    {
+      "Identity": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/obj/Debug/net8.0/scopedcss/projectbundle/CentroEventos.UI.bundle.scp.css",
+      "SourceId": "CentroEventos.UI",
+      "SourceType": "Computed",
+      "ContentRoot": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/obj/Debug/net8.0/scopedcss/projectbundle/",
+      "BasePath": "_content/CentroEventos.UI",
+      "RelativePath": "CentroEventos.UI#[.{fingerprint}]!.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "Fingerprint": "3z6vqs62lx",
+      "Integrity": "D1+qsT31TzkBnuGV0CtfiS3HU7O7p8o0knlI9nA7LZU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/obj/Debug/net8.0/scopedcss/projectbundle/CentroEventos.UI.bundle.scp.css"
+    },
+    {
+      "Identity": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/app.css",
+      "SourceId": "CentroEventos.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/",
+      "BasePath": "_content/CentroEventos.UI",
+      "RelativePath": "app#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "0phg8pwkkc",
+      "Integrity": "bDbaq8UWEpesem5IVBxpId8pMPsQf/MG0wt9S1S7ceI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/app.css"
+    },
+    {
+      "Identity": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/bootstrap/bootstrap.min.css",
+      "SourceId": "CentroEventos.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/",
+      "BasePath": "_content/CentroEventos.UI",
+      "RelativePath": "bootstrap/bootstrap.min#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "nnd3j6qc9u",
+      "Integrity": "49JMM6u1dblrpPY4K0DVQvuqX5QeY5gzgSttB+kJhn4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/bootstrap/bootstrap.min.css"
+    },
+    {
+      "Identity": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/bootstrap/bootstrap.min.css.map",
+      "SourceId": "CentroEventos.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/",
+      "BasePath": "_content/CentroEventos.UI",
+      "RelativePath": "bootstrap/bootstrap.min.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "pedwmehgup",
+      "Integrity": "4ekVxlAexCt5yLuAuh+3RnayUdlUAtRDz/Q8/9M6oTk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Identity": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/favicon.png",
+      "SourceId": "CentroEventos.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/",
+      "BasePath": "_content/CentroEventos.UI",
+      "RelativePath": "favicon#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ifv42okdf2",
+      "Integrity": "4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/favicon.png"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "app.0phg8pwkkc.css",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/app.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3667"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bDbaq8UWEpesem5IVBxpId8pMPsQf/MG0wt9S1S7ceI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Jun 2025 02:02:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0phg8pwkkc"
+        },
+        {
+          "Name": "label",
+          "Value": "app.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bDbaq8UWEpesem5IVBxpId8pMPsQf/MG0wt9S1S7ceI="
+        }
+      ]
+    },
+    {
+      "Route": "app.css",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/app.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3667"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bDbaq8UWEpesem5IVBxpId8pMPsQf/MG0wt9S1S7ceI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Jun 2025 02:02:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bDbaq8UWEpesem5IVBxpId8pMPsQf/MG0wt9S1S7ceI="
+        }
+      ]
+    },
+    {
+      "Route": "bootstrap/bootstrap.min.css",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/bootstrap/bootstrap.min.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "162723"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"49JMM6u1dblrpPY4K0DVQvuqX5QeY5gzgSttB+kJhn4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Jun 2025 01:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-49JMM6u1dblrpPY4K0DVQvuqX5QeY5gzgSttB+kJhn4="
+        }
+      ]
+    },
+    {
+      "Route": "bootstrap/bootstrap.min.css.map",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/bootstrap/bootstrap.min.css.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "449108"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4ekVxlAexCt5yLuAuh+3RnayUdlUAtRDz/Q8/9M6oTk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Jun 2025 01:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4ekVxlAexCt5yLuAuh+3RnayUdlUAtRDz/Q8/9M6oTk="
+        }
+      ]
+    },
+    {
+      "Route": "bootstrap/bootstrap.min.css.pedwmehgup.map",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/bootstrap/bootstrap.min.css.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "449108"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4ekVxlAexCt5yLuAuh+3RnayUdlUAtRDz/Q8/9M6oTk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Jun 2025 01:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "pedwmehgup"
+        },
+        {
+          "Name": "label",
+          "Value": "bootstrap/bootstrap.min.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4ekVxlAexCt5yLuAuh+3RnayUdlUAtRDz/Q8/9M6oTk="
+        }
+      ]
+    },
+    {
+      "Route": "bootstrap/bootstrap.min.nnd3j6qc9u.css",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/bootstrap/bootstrap.min.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "162723"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"49JMM6u1dblrpPY4K0DVQvuqX5QeY5gzgSttB+kJhn4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Jun 2025 01:53:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "nnd3j6qc9u"
+        },
+        {
+          "Name": "label",
+          "Value": "bootstrap/bootstrap.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-49JMM6u1dblrpPY4K0DVQvuqX5QeY5gzgSttB+kJhn4="
+        }
+      ]
+    },
+    {
+      "Route": "CentroEventos.UI.3z6vqs62lx.bundle.scp.css",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/obj/Debug/net8.0/scopedcss/projectbundle/CentroEventos.UI.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7163"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D1+qsT31TzkBnuGV0CtfiS3HU7O7p8o0knlI9nA7LZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Jun 2025 15:47:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3z6vqs62lx"
+        },
+        {
+          "Name": "label",
+          "Value": "CentroEventos.UI.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-D1+qsT31TzkBnuGV0CtfiS3HU7O7p8o0knlI9nA7LZU="
+        }
+      ]
+    },
+    {
+      "Route": "CentroEventos.UI.3z6vqs62lx.styles.css",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/obj/Debug/net8.0/scopedcss/bundle/CentroEventos.UI.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7163"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D1+qsT31TzkBnuGV0CtfiS3HU7O7p8o0knlI9nA7LZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Jun 2025 15:47:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3z6vqs62lx"
+        },
+        {
+          "Name": "label",
+          "Value": "CentroEventos.UI.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-D1+qsT31TzkBnuGV0CtfiS3HU7O7p8o0knlI9nA7LZU="
+        }
+      ]
+    },
+    {
+      "Route": "CentroEventos.UI.bundle.scp.css",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/obj/Debug/net8.0/scopedcss/projectbundle/CentroEventos.UI.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7163"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D1+qsT31TzkBnuGV0CtfiS3HU7O7p8o0knlI9nA7LZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Jun 2025 15:47:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-D1+qsT31TzkBnuGV0CtfiS3HU7O7p8o0knlI9nA7LZU="
+        }
+      ]
+    },
+    {
+      "Route": "CentroEventos.UI.styles.css",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/obj/Debug/net8.0/scopedcss/bundle/CentroEventos.UI.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7163"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D1+qsT31TzkBnuGV0CtfiS3HU7O7p8o0knlI9nA7LZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 20 Jun 2025 15:47:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-D1+qsT31TzkBnuGV0CtfiS3HU7O7p8o0knlI9nA7LZU="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.ifv42okdf2.png",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/favicon.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 16 Jun 2025 20:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ifv42okdf2"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.png",
+      "AssetFile": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/CentroEventos/CentroEventos.UI/wwwroot/favicon.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 16 Jun 2025 20:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg="
+        }
+      ]
+    }
+  ]
+}

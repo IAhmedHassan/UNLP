@@ -1,0 +1,22 @@
+﻿@inject Sesion sesion
+@inject NavigationManager Nav
+
+@if (!sesion.EstaIniciado)
+{
+    <p>Redirigiendo...</p>
+}
+else
+{
+    @ChildContent
+}
+
+@code {
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && !sesion.EstaIniciado)
+            // await Task.Delay(500); requiere async en la firma del método.
+            Nav.NavigateTo("/");
+    }
+}

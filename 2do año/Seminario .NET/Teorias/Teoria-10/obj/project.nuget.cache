@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "FI6iWusi6gU=",
+  "success": true,
+  "projectFilePath": "/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/Teoria-10/Teoria-10.csproj",
+  "expectedPackageFiles": [
+    "/home/pelo/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.4/microsoft.aspnetcore.app.ref.9.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

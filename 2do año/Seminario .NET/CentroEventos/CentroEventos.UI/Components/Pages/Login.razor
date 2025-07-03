@@ -1,0 +1,68 @@
+@page "/"
+@rendermode InteractiveServer
+
+@inject Sesion sesion
+@inject LoginUseCase LoginUseCase
+@inject NavigationManager Navegacion
+@inject UiNotifier Notifier
+
+@if (sesion.EstaIniciado) {
+    <p>Redirigiendo...</p>
+}
+else {
+
+<PageTitle>Inicio de Sesión</PageTitle>
+
+<h1> Bienvenido! </h1>
+
+<form class="formulario" @onsubmit="OnSubmitLogin">
+    <label for="email"></label>
+    <input required placeholder="Email" id="email" type="email" @bind="email" />
+
+    <label for="password"></label>
+    <input required placeholder="Contraseña" id="password" type="@mostrarPassword" @bind="password"/>
+
+    <label for="showpass">Mostrar constraseña
+        <input id="showpass" type="checkbox" @onclick="TogglePw" />
+    </label>
+
+    <button class="btn btn-primary" type="submit">Ingresar</button>
+
+    <p>¿Aún no tenés usuario? <a href="/register">Registrarse</a></p>
+    
+</form>
+
+}
+@code {
+    private string email = "";
+    private string password = "";
+    private string mostrarPassword = "password";
+
+    private void TogglePw()
+    {
+        if (mostrarPassword == "password")
+            mostrarPassword = "text";
+        else
+            mostrarPassword = "password";
+    }
+
+    private Task OnSubmitLogin()
+    {
+        Logear();
+        return Task.CompletedTask;
+    }
+
+    private void Logear()
+    {
+        bool funciono = LoginUseCase.Ejecutar(email, password);
+        Notifier.Notify();
+        Navegacion.NavigateTo("/home");
+    }
+    
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && sesion.EstaIniciado)
+            Navegacion.NavigateTo("/home");
+    }
+
+}

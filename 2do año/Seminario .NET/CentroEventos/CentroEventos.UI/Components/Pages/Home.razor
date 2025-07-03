@@ -1,0 +1,27 @@
+﻿@page "/home"
+
+@inject Sesion sesion
+@inject NavigationManager Navegacion
+@rendermode InteractiveServer
+
+<AuthGuard>
+
+    <PageTitle>Inicio</PageTitle>
+
+    <h1>Hola @sesion.Usuario.Nombre!</h1>
+
+    <p>Bienvenido al Sistema de Gestión del Centro Deportivo Universitario.</p>
+
+</AuthGuard>
+
+@code {
+    @*
+    protected override void OnInitialized()
+    {
+        if (!sesion.EstaIniciado)
+        {
+            Navegacion.NavigateTo("/");
+        }
+    }
+    *@
+}

@@ -1,0 +1,77 @@
+﻿@inject Sesion sesion
+@rendermode InteractiveServer
+@inject NavigationManager Navegador
+@inject LogoutUseCase CerrarSesionUseCase
+@inject UiNotifier Notifier
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Campo de Deportes</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> @textoBtn
+            </NavLink>
+        </div>
+        @if (sesion.EstaIniciado){
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/listas">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Listas
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/user/">
+                <span class="bi" aria-hidden="true"></span> Mi perfil
+            </NavLink>
+        </div>
+        
+        <div class="nav-item px-3">
+            <button class="nav-link" type="button" @onclick="CerrarSesion">
+            <span class="bi bi-box-arrow-right-nav-menu" aria-hidden="true"></span> Cerrar sesión
+            </button>
+        </div>
+        }
+    </nav>
+</div>
+
+@code
+{
+    string textoBtn = "Login";
+    
+    protected override void OnInitialized()
+    {
+        Notifier.OnChange += RefrescarMenu;
+        SetTextoBtn();
+    }
+
+    public void Dispose()
+    {
+        Notifier.OnChange -= RefrescarMenu;
+    }
+
+    private void RefrescarMenu()
+    {
+        SetTextoBtn();
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void SetTextoBtn()
+        => textoBtn = sesion.EstaIniciado ? "Home" : "Login";
+
+
+    private void CerrarSesion() {
+        Console.WriteLine("Cerrar sesión ejecutado");
+        bool funciono = CerrarSesionUseCase.Ejecutar();
+        SetTextoBtn();
+        Notifier.Notify();
+        Navegador.NavigateTo("/");
+    }
+
+}

@@ -1,0 +1,692 @@
+************************************************************
+           Diapositiva 9
+           archivo fuente: Cliente.cs
+************************************************************
+
+namespace AL.Aplicacion.Entidades;
+
+public class Cliente
+{
+    public int Id { get; set; }
+    public string Nombre { get; set; } = "";
+    public string Apellido { get; set; } = "";
+}
+
+
+
+************************************************************
+           Diapositiva 10
+           archivo fuente: IRepositorioCliente.cs
+************************************************************
+
+using AL.Aplicacion.Entidades;
+
+namespace AL.Aplicacion.Interfaces;
+
+public interface IRepositorioCliente
+{
+    List<Cliente> GetClientes();
+    Cliente? GetCliente(int id);
+    void ModificarCliente(Cliente cliente);
+    void EliminarCliente(int id);
+    void AgregarCliente(Cliente cliente);
+}
+
+
+
+************************************************************
+           Diapositiva 11
+           archivo fuente: ClienteUseCase.cs
+************************************************************
+
+using AL.Aplicacion.Interfaces;
+
+namespace AL.Aplicacion.UseCases;
+
+public abstract class ClienteUseCase
+{
+   protected IRepositorioCliente Repositorio { get; private set; }
+
+   public ClienteUseCase(IRepositorioCliente repositorio)
+   {
+       this.Repositorio = repositorio;
+   }
+}
+
+
+************************************************************
+           Diapositiva 12
+           archivo fuente: AgregarClienteUseCase.cs
+************************************************************
+
+using AL.Aplicacion.Entidades;
+using AL.Aplicacion.Interfaces;
+
+namespace AL.Aplicacion.UseCases;
+
+public class AgregarClienteUseCase(IRepositorioCliente repositorio):ClienteUseCase(repositorio)
+{
+   public void Ejecutar(Cliente cliente)
+   {
+       //aquí podríamos insertar código de validación de cliente
+
+       Repositorio.AgregarCliente(cliente);
+   }
+}
+
+
+
+************************************************************
+           Diapositiva 13
+           archivo fuente: EliminarClienteUseCase.cs
+************************************************************
+
+using AL.Aplicacion.Interfaces;
+
+namespace AL.Aplicacion.UseCases;
+
+public class EliminarClienteUseCase(IRepositorioCliente repositorio):ClienteUseCase(repositorio)
+{
+   public void Ejecutar(int id)
+  {
+      Repositorio.EliminarCliente(id);
+  }
+}
+
+
+
+************************************************************
+           Diapositiva 14
+           archivo fuente: ListarClientesUseCase.cs
+************************************************************
+
+using AL.Aplicacion.Entidades;
+using AL.Aplicacion.Interfaces;
+
+namespace AL.Aplicacion.UseCases;
+
+public class ListarClientesUseCase(IRepositorioCliente repositorio):ClienteUseCase(repositorio)
+{
+   public List<Cliente> Ejecutar()
+  {
+      return Repositorio.GetClientes();
+  }
+}
+
+
+
+************************************************************
+           Diapositiva 15
+           archivo fuente: ModificarClienteUseCase.cs
+************************************************************
+
+using AL.Aplicacion.Entidades;
+using AL.Aplicacion.Interfaces;
+
+namespace AL.Aplicacion.UseCases;
+
+public class ModificarClienteUseCase(IRepositorioCliente repositorio):ClienteUseCase(repositorio)
+{
+   public void Ejecutar(Cliente cliente)
+  {
+      Repositorio.ModificarCliente(cliente);
+  }
+}
+
+
+
+************************************************************
+           Diapositiva 16
+           archivo fuente: ObtenerClienteUseCase.cs
+************************************************************
+
+using AL.Aplicacion.Entidades;
+using AL.Aplicacion.Interfaces;
+
+namespace AL.Aplicacion.UseCases;
+
+public class ObtenerClienteUseCase(IRepositorioCliente repositorio):ClienteUseCase(repositorio)
+{
+  public Cliente? Ejecutar(int id)
+  {
+     return Repositorio.GetCliente(id);
+  }
+}
+
+
+
+************************************************************
+           Diapositivas 19 y 20
+           archivo fuente: RepositorioClienteMock
+************************************************************
+
+using AL.Aplicacion.Entidades;
+using AL.Aplicacion.Interfaces;
+
+namespace AL.Repositorios;
+public class RepositorioClienteMock : IRepositorioCliente
+{
+
+    private readonly List<Cliente> _listaClietes = new List<Cliente>(){
+       new Cliente(){Id=1,Nombre="Alberto",Apellido="García"},
+       new Cliente(){Id=2,Nombre="Ana",Apellido="Perez"}
+   };//hemos hardcodeado dos clientes en la lista
+    static int s_proximoId = 3;
+
+    private Cliente Clonar(Cliente c) //se van a devolver copias de los cliente guardados
+    {
+        return new Cliente()
+        {
+            Id = c.Id,
+            Nombre = c.Nombre,
+            Apellido = c.Apellido
+        };
+    }
+    public void AgregarCliente(Cliente cliente)
+    {
+        cliente.Id = s_proximoId++;
+        _listaClietes.Add(Clonar(cliente));
+    }
+    public void EliminarCliente(int id)
+    {
+        var cliente = _listaClietes.SingleOrDefault(c => c.Id == id);
+        if (cliente != null)
+        {
+            _listaClietes.Remove(cliente);
+        }
+    }
+    public Cliente? GetCliente(int id)
+    {
+        Cliente? c = _listaClietes.SingleOrDefault(c => c.Id == id);
+        if (c != null)
+        {
+            return Clonar(c);
+        }
+        return null;
+    }
+    public List<Cliente> GetClientes()
+    {
+        return _listaClietes.Select(c => Clonar(c)).ToList();
+    }
+    public void ModificarCliente(Cliente cliente)
+    {
+        var cli = _listaClietes.SingleOrDefault(c => c.Id == cliente.Id);
+        if (cli != null)
+        {
+            cli.Apellido = cliente.Apellido;
+            cli.Nombre = cliente.Nombre;
+        }
+    }
+}
+
+************************************************************
+           Diapositiva 22
+           archivo fuente: DialogoConfirmacion.razor
+************************************************************
+
+@rendermode InteractiveServer
+@if(visible)
+{
+   <h3>@Mensaje</h3>
+   <button class="btn btn-primary" @onclick="Cerrar">Aceptar</button>
+   <button class="btn btn-secondary" @onclick="Cerrar">Cancelar</button>
+}
+
+@code{
+   private bool visible = false;
+   [Parameter]
+   public string Mensaje {get;set;}="";
+
+   public void Mostrar()
+   {
+       visible=true;
+       StateHasChanged();
+   }
+
+   void Cerrar()
+   {
+       visible=false;
+   }
+}
+
+
+
+
+************************************************************
+           Diapositivas 24 y 25
+           archivo fuente: Counter.razor
+************************************************************
+
+@page "/counter"
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<button class="btn btn-danger" @onclick="ConfirmarReseteo">Resetear contador</button>
+
+<DialogoConfirmacion @ref=dialogo Mensaje="¿Está seguro que desea resetear el contador?" />
+
+
+@code {
+   private int currentCount = 0;
+
+   private void IncrementCount()
+   {
+       currentCount++;
+   }
+
+   DialogoConfirmacion dialogo = null!;
+   private void ConfirmarReseteo()
+   {
+       dialogo.Mostrar();
+   }
+}
+
+
+
+************************************************************
+           Diapositiva 27
+           archivo fuente: DialogoConfirmacion.razor
+************************************************************
+
+@rendermode InteractiveServer
+@if(visible)
+{
+    <h3>@Mensaje</h3>
+    <button class="btn btn-primary" @onclick="CerrarYconfirmar">Aceptar</button>
+    <button class="btn btn-secondary" @onclick="Cerrar">Cancelar</button>
+}
+
+@code{
+    private bool visible = false;
+    [Parameter]
+    public string Mensaje {get;set;}="";
+
+    public void Mostrar()
+    {
+        visible=true;
+        StateHasChanged();
+    }
+    void Cerrar()
+    {
+        visible=false;
+    }
+
+    [Parameter]
+    public EventCallback OnConfirmado{get;set;}
+
+    void CerrarYconfirmar()
+    {
+        visible=false;
+        OnConfirmado.InvokeAsync();
+    }
+}
+
+
+************************************************************
+           Diapositivas 28
+           archivo fuente: Counter.razor
+************************************************************
+
+@page "/counter"
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<button class="btn btn-danger" @onclick="ConfirmarReseteo">Resetear contador</button>
+<DialogoConfirmacion @ref=dialogo Mensaje="¿Está seguro que desea resetear el contador?"
+    OnConfirmado="Resetear" />
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+    DialogoConfirmacion dialogo = null!;
+    private void ConfirmarReseteo()
+    {
+        dialogo.Mostrar();
+    }
+    private void Resetear()
+    {
+        currentCount = 0;
+    }
+}
+
+
+
+************************************************************
+           Diapositiva 31
+           archivo fuente: DialogoConfirmacion.razor
+************************************************************
+
+@rendermode InteractiveServer
+@if (visible)
+{
+   <div class="dialogo-contenedor">
+       <div class="dialogo-contenido">
+           <h3>@Mensaje</h3>
+           <button class="btn btn-primary" @onclick="CerrarYconfirmar">Aceptar</button>
+           <button class="btn btn-secondary" @onclick="Cerrar">Cancelar</button>
+       </div>
+   </div>
+}
+
+@code {
+   . . .
+
+
+************************************************************
+           Diapositiva 33
+           archivo fuente: DialogoConfirmacion.razor.css
+************************************************************
+
+.dialogo-contenedor {
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom:0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dialogo-contenido{
+    width: 50%;
+    padding: 20px;
+    background-color: white;
+}
+
+
+************************************************************
+           Diapositiva 38
+           archivo fuente: Program.cs
+************************************************************
+
+...
+
+//agregamos estas directivas using
+using AL.Repositorios;
+using AL.Aplicacion.UseCases;
+using AL.Aplicacion.Interfaces;
+
+...
+
+//agregamos estos servicios al contenedor DI
+builder.Services.AddTransient<AgregarClienteUseCase>();
+builder.Services.AddTransient<ListarClientesUseCase>();
+builder.Services.AddTransient<EliminarClienteUseCase>();
+builder.Services.AddTransient<ModificarClienteUseCase>();
+builder.Services.AddTransient<ObtenerClienteUseCase>();
+builder.Services.AddScoped<IRepositorioCliente, RepositorioClienteMock>();
+
+
+************************************************************
+           Diapositiva 39
+           archivo fuente: _imports.razor
+************************************************************
+...
+@using AL.Aplicacion.Entidades
+@using AL.Aplicacion.Interfaces
+@using AL.Aplicacion.UseCases
+@using AL.Repositorios
+
+
+************************************************************
+           Diapositiva 40
+           archivo fuente: ListadoClientes.razor
+************************************************************
+
+@page "/listadoclientes"
+@rendermode InteractiveServer
+@inject ListarClientesUseCase ListarClientesUseCase
+
+
+@code {
+   List<Cliente> _lista = new List<Cliente>();
+   protected override void OnInitialized()
+   {
+       _lista = ListarClientesUseCase.Ejecutar();
+   }
+}
+
+
+
+************************************************************
+           Diapositiva 41
+           archivo fuente: ListadoClientes.razor
+************************************************************
+
+@page "/listadoclientes"
+@rendermode InteractiveServer
+@inject ListarClientesUseCase ListarClientesUseCase
+
+<table class="table">
+   <thead>
+       <tr>
+           <th>ID</th>
+           <th>NOMBRE</th>
+           <th>APELLIDO</th>
+       </tr>
+   </thead>
+   <tbody>
+       @foreach (var cli in _lista)
+       {
+           <tr>
+               <td>@cli.Id</td>
+               <td>@cli.Nombre</td>
+               <td>@cli.Apellido</td>
+           </tr>
+       }
+   </tbody>
+</table>
+
+@code {
+...
+
+
+************************************************************
+           Diapositiva 45
+           archivo fuente: EditarCliente.razor
+************************************************************
+
+@page "/cliente"
+@rendermode InteractiveServer
+@inject NavigationManager Navegador;
+@inject AgregarClienteUseCase AgregarClienteUseCase
+
+<input placeholder="Nombre" @bind="_cliente.Nombre" class="form-control">
+<input placeholder="Apellido" @bind="_cliente.Apellido" class="form-control">
+<button class="btn btn-primary" @onclick="Aceptar">Aceptar</button>
+
+@code {
+   Cliente _cliente = new Cliente();
+   void Aceptar()
+   {
+       AgregarClienteUseCase.Ejecutar(_cliente);
+       _cliente = new Cliente();
+       Navegador.NavigateTo("listadoclientes");
+   }
+}
+
+
+************************************************************
+           Diapositiva 53
+           archivo fuente: ListadoClientes.razor
+************************************************************
+
+@page "/listadoclientes"
+@rendermode InteractiveServer
+@inject ListarClientesUseCase ListarClientesUseCase
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>ACCIÓN</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cli in _lista)
+        {
+            <tr>
+                <td>@cli.Id</td>
+                <td>@cli.Nombre</td>
+                <td>@cli.Apellido</td>
+                <td>
+                    <button class="btn btn-primary">Editar</button>
+                    <button class="btn btn-danger">Eliminar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    List<Cliente> _lista = new List<Cliente>();
+    protected override void OnInitialized()
+    {
+        _lista = ListarClientesUseCase.Ejecutar();
+    }
+}
+
+
+************************************************************
+           Diapositivas 55, 56 y 57
+           archivo fuente: ListadoClientes.razor
+************************************************************
+
+@page "/listadoclientes"
+@rendermode InteractiveServer
+@inject ListarClientesUseCase ListarClientesUseCase
+@inject EliminarClienteUseCase EliminarClienteUseCase
+
+<DialogoConfirmacion @ref="dialogo" OnConfirmado="Eliminar"/>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>ACCIÓN</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cli in _lista)
+        {
+            <tr>
+                <td>@cli.Id</td>
+                <td>@cli.Nombre</td>
+                <td>@cli.Apellido</td>
+                <td>
+                    <button class="btn btn-primary">Editar</button>
+                    <button class="btn btn-danger" @onclick="()=>ConfirmarEliminacion(cli)">
+                        Elliminar
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    List<Cliente> _lista = new List<Cliente>();
+    protected override void OnInitialized()
+    {
+        _lista = ListarClientesUseCase.Ejecutar();
+    }
+
+    DialogoConfirmacion dialogo = null!;
+    Cliente? _clienteParaEliminar = null;
+    private void ConfirmarEliminacion(Cliente cli)
+    {
+        _clienteParaEliminar = cli;
+        dialogo.Mensaje = $"¿Desea eliminar al cliente {cli.Nombre} {cli.Apellido}?";
+        dialogo.Mostrar();
+    }
+    private void Eliminar()
+    {
+        if (_clienteParaEliminar != null)
+        {
+            EliminarClienteUseCase.Ejecutar(_clienteParaEliminar.Id);
+            _lista = ListarClientesUseCase.Ejecutar(); //se actualiza la lista de clientes
+        }
+    }
+}
+
+
+************************************************************
+           Diapositivas 62, 63, 64 y 65
+           archivo fuente: EditarCliente.razor
+************************************************************
+
+@page "/cliente/{Id:int?}"
+@rendermode InteractiveServer
+@inject ObtenerClienteUseCase ObtenerClienteUseCase
+@inject ModificarClienteUseCase ModificarClienteUseCase
+@inject NavigationManager Navegador;
+@inject AgregarClienteUseCase AgregarClienteUseCase
+
+@if (_esNuevoCliente)
+{
+   <h3>Agregando un nuevo Cliente</h3>
+}
+else
+{
+   <h3>Modificando al Cliente "@_cliente.Nombre"</h3>
+} 
+
+<input placeholder="Nombre" @bind="_cliente.Nombre" class="form-control">
+<input placeholder="Apellido" @bind="_cliente.Apellido" class="form-control">
+<button class="btn btn-primary" @onclick="Aceptar">Aceptar</button>
+
+@code {
+    Cliente _cliente = new Cliente();
+    [Parameter] public int? Id { get; set; }
+    bool _esNuevoCliente = true;
+    protected override void OnParametersSet()
+    {
+        if (Id != null)
+        {
+            var cli_hallado = ObtenerClienteUseCase.Ejecutar(Id.Value);
+            if (cli_hallado != null)
+            {
+                _cliente = cli_hallado;
+                _esNuevoCliente = false;
+            }
+        }
+    }
+   void Aceptar()
+   {
+       if (_esNuevoCliente)
+       {
+           AgregarClienteUseCase.Ejecutar(_cliente);
+       }
+       else
+       {
+           ModificarClienteUseCase.Ejecutar(_cliente);
+       }
+       _cliente = new Cliente();
+       Navegador.NavigateTo("listadoclientes");
+   }  
+}
+

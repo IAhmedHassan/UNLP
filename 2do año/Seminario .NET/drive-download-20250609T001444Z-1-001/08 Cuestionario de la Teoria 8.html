@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario Interactivo - C# Teoría 8</title>
+    <style>
+        /* Estilos CSS (igual que la versión anterior) */
+         body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        #quiz-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #5a2d7d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #question-container {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        #question-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        #options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #options-list li {
+            margin-bottom: 12px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+         #options-list li:hover {
+            background-color: #f0e6f7;
+         }
+
+        #options-list input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+         #options-list label {
+             cursor: pointer;
+             display: inline;
+             vertical-align: middle;
+         }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            margin-top: 20px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #8a4dbf;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #5a2d7d;
+        }
+         button:disabled {
+             background-color: #cccccc;
+             cursor: not-allowed;
+         }
+
+        #feedback-container {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .feedback-correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback-incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .feedback-explanation {
+            margin-top: 10px;
+            font-weight: normal;
+            font-style: italic;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+        }
+        .feedback-explanation a {
+            color: #5a2d7d;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+         .feedback-explanation a:hover {
+             color: #8a4dbf;
+         }
+
+
+        #score-container {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e9dff0;
+            border-radius: 8px;
+        }
+         #score-container p {
+             font-size: 1.2em;
+         }
+         #score {
+            font-weight: bold;
+            color: #5a2d7d;
+         }
+         #total-questions {
+             font-weight: bold;
+         }
+         #restart-btn {
+             width: auto;
+             display: inline-block;
+             padding: 10px 30px;
+         }
+    </style>
+</head>
+<body>
+
+    <div id="quiz-container">
+        <h1>Cuestionario Interactivo - C# Teoría 8</h1>
+
+        <div id="question-container">
+            <p id="question-number"></p>
+            <p id="question-text"></p>
+            <ul id="options-list">
+                <!-- Las opciones se cargarán aquí con JS -->
+            </ul>
+        </div>
+
+        <button id="submit-btn">Verificar Respuesta</button>
+
+        <div id="feedback-container" style="display: none;">
+             <p id="feedback-result"></p>
+             <!-- Usaremos innerHTML para este elemento -->
+            <p id="feedback-explanation" class="feedback-explanation"></p>
+        </div>
+
+        <button id="next-btn" style="display: none;">Siguiente Pregunta</button> <!-- Texto se cambiará dinámicamente -->
+
+        <div id="score-container" style="display: none;">
+            <h2>Resultado Final</h2>
+            <p>Tu puntuación: <span id="score">0</span> / <span id="total-questions">0</span></p>
+            <button id="restart-btn">Reiniciar Cuestionario</button>
+        </div>
+    </div>
+
+    <script>
+        // <<<--- Nombre del archivo PDF para esta teoría
+        const pdfFileName = '08 Teoria y Practica 2025.pdf';
+        // <<<--- Asegúrate de que este archivo PDF esté en la misma carpeta que este archivo HTML
+
+        // <<<--- Datos del cuestionario para Teoría 8 EXACTAMENTE como los proporcionaste
+        const quizData = [
+            {
+                question: "¿Puede una interfaz en C# heredar de múltiples interfaces?",
+                options: [
+                    "No, las interfaces solo pueden heredar de una única interfaz base.",
+                    "No, las interfaces no pueden heredar de otras interfaces, solo las clases pueden.",
+                    "Sí, las interfaces pueden heredar de múltiples interfaces.",
+                    "Sí, pero solo si las interfaces heredadas no tienen miembros en común."
+                ],
+                correctAnswer: 2, // Índice c)
+                feedback: "Respuesta Correcta: c)\nFeedback: La página 3 muestra explícitamente que las interfaces pueden heredar de múltiples interfaces (ej: interface IAuditable: IRegistrable, IReportable)."
+            },
+            {
+                question: "Si una clase implementa dos interfaces diferentes que tienen un método con el mismo nombre y firma (ej: void Iniciar();), ¿qué mecanismo permite a la clase proporcionar implementaciones distintas para cada interfaz?",
+                options: [
+                    "Sobrecarga de métodos.",
+                    "Implementación explícita de interfaces.",
+                    "Uso de la palabra clave base.",
+                    "Declarar los métodos como virtual en las interfaces."
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: Las páginas 5 a 8 explican que cuando hay miembros duplicados en diferentes interfaces implementadas por una clase, la \"Implementación explícita de interfaces\" permite diferenciar las implementaciones (ej: void ITareaEjecutable.Iniciar() { ... })."
+            },
+            {
+                question: "Al usar la implementación explícita de un miembro de interfaz (ej: void ITemporizador.Iniciar() { ... }), ¿qué modificador de acceso se utiliza en la implementación dentro de la clase?",
+                options: [
+                    "public",
+                    "private",
+                    "protected",
+                    "Ninguno, no se utiliza modificador de acceso."
+                ],
+                correctAnswer: 3, // Índice d)
+                feedback: "Respuesta Correcta: d)\nFeedback: La página 8 advierte específicamente que los métodos en las implementaciones explícitas de interfaces no llevan modificador de acceso (public, etc.)."
+            },
+            {
+                question: "¿Para qué se utiliza principalmente la interfaz System.IComparable?",
+                options: [
+                    "Para permitir que los objetos de una clase sean iterados con foreach.",
+                    "Para definir un orden natural o criterio de clasificación predeterminado para los objetos de una clase.",
+                    "Para permitir la clonación profunda de objetos.",
+                    "Para liberar recursos no administrados de forma determinista."
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: Las páginas 13, 18 y 19 introducen IComparable como la interfaz que permite al método Array.Sort() (y otros mecanismos de ordenamiento) saber cómo comparar instancias de una clase para establecer un orden."
+            },
+            {
+                question: "El método CompareTo(object? obj) de la interfaz IComparable debe devolver un valor entero. ¿Qué significa si devuelve un valor menor que cero (< 0)?",
+                options: [
+                    "La instancia actual (this) es igual que obj.",
+                    "La instancia actual (this) debe ir después que obj en el ordenamiento.",
+                    "La instancia actual (this) debe ir antes que obj en el ordenamiento.",
+                    "La comparación no es posible entre los objetos."
+                ],
+                correctAnswer: 2, // Índice c)
+                feedback: "Respuesta Correcta: c)\nFeedback: La página 19 detalla los valores de retorno de CompareTo: un valor menor que cero indica que la instancia actual (this) precede a obj en el orden."
+            },
+            {
+                question: "¿Cuándo se utiliza la interfaz System.Collections.IComparer en lugar de IComparable?",
+                options: [
+                    "Cuando se necesita definir un único orden natural para la clase.",
+                    "Cuando se necesita comparar objetos de tipos completamente diferentes.",
+                    "Cuando se desea proporcionar criterios de ordenamiento alternativos o externos a la clase.",
+                    "Cuando se trabaja con colecciones genéricas (List<T>)."
+                ],
+                correctAnswer: 2, // Índice c)
+                feedback: "Respuesta Correcta: c)\nFeedback: Las páginas 22 y 23 introducen IComparer como una forma de definir comparadores externos que pueden pasarse a métodos como Array.Sort() para aplicar criterios de ordenamiento diferentes al definido por IComparable en la propia clase."
+            },
+            {
+                question: "¿Qué método principal define la interfaz System.Collections.IEnumerable?",
+                options: [
+                    "MoveNext()",
+                    "Current()",
+                    "GetEnumerator()",
+                    "Reset()"
+                ],
+                correctAnswer: 2, // Índice c)
+                feedback: "Respuesta Correcta: c)\nFeedback: La página 34 muestra la definición de IEnumerable, cuyo único método es GetEnumerator(), que devuelve un objeto IEnumerator."
+            },
+            {
+                question: "¿Qué permite hacer la instrucción foreach con un objeto que implementa IEnumerable?",
+                options: [
+                    "Comparar el objeto con otros objetos del mismo tipo.",
+                    "Liberar los recursos del objeto automáticamente.",
+                    "Invocar un método específico del objeto de forma polimórfica.",
+                    "Iterar a través de los elementos que expone el objeto."
+                ],
+                correctAnswer: 3, // Índice d)
+                feedback: "Respuesta Correcta: d)\nFeedback: Las páginas 29, 32, 33 y 47 explican que foreach funciona con tipos enumerables (que implementan IEnumerable o tienen un método GetEnumerator() adecuado) para recorrer sus elementos."
+            },
+            {
+                question: "La interfaz System.Collections.IEnumerator define un contrato para los enumeradores. ¿Qué propiedad devuelve el elemento actual en la secuencia?",
+                options: [
+                    "Item",
+                    "Value",
+                    "Element",
+                    "Current"
+                ],
+                correctAnswer: 3, // Índice d)
+                feedback: "Respuesta Correcta: d)\nFeedback: La página 38 muestra la definición de IEnumerator, donde la propiedad Current es la que expone el elemento actual de la colección durante la iteración."
+            },
+            {
+                question: "¿Qué hace el método MoveNext() de la interfaz IEnumerator?",
+                options: [
+                    "Devuelve el siguiente elemento de la colección.",
+                    "Avanza el enumerador a la siguiente posición y devuelve true si hay más elementos, o false si se llegó al final.",
+                    "Reinicia el enumerador a la posición inicial.",
+                    "Devuelve el número total de elementos en la colección."
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: La página 38 describe MoveNext() como el método que avanza al siguiente elemento y retorna un booleano indicando si el avance fue exitoso (si aún no se ha llegado al final de la secuencia)."
+            },
+            {
+                question: "¿Qué palabra clave se utiliza en C# para crear iteradores, simplificando la implementación de enumeradores y enumerables?",
+                options: [
+                    "iterator",
+                    "iterate",
+                    "yield",
+                    "enum"
+                ],
+                correctAnswer: 2, // Índice c)
+                feedback: "Respuesta Correcta: c)\nFeedback: La página 48 introduce los iteradores y la sentencia yield (yield return y yield break) como la forma simplificada de crear enumeradores, donde el compilador genera la máquina de estados necesaria."
+            },
+            {
+                question: "¿Qué hace la sentencia yield return expresion; dentro de un bloque iterador?",
+                options: [
+                    "Termina la ejecución del iterador inmediatamente.",
+                    "Devuelve el valor de expresion como el siguiente elemento de la secuencia y pausa la ejecución del iterador hasta la próxima llamada a MoveNext().",
+                    "Reinicia el iterador desde el principio.",
+                    "Lanza una excepción InvalidOperationException."
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: La página 48 define yield return como la sentencia que devuelve un elemento de la colección y mueve (conceptualmente) la posición al siguiente, manteniendo el estado para la próxima iteración."
+            },
+            {
+                question: "¿Qué es un delegado en C#?",
+                options: [
+                    "Una interfaz que solo define un método.",
+                    "Un tipo especial de clase cuyos objetos almacenan referencias a métodos con una firma específica.",
+                    "Una clase estática utilizada para métodos de extensión.",
+                    "Un atributo que se aplica a los métodos para permitir la reflexión."
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: La página 62 define un delegado como un tipo especial de clase que almacena referencias a métodos, permitiendo tratarlos como objetos (pasarlos como parámetros, etc.)."
+            },
+            {
+                question: "¿Cuál es la sintaxis para definir un tipo delegado llamado MiDelegado que represente métodos que reciben un string y no devuelven nada (void)?",
+                options: [
+                    "delegate MiDelegado(string s);",
+                    "delegate void MiDelegado(string s);",
+                    "class MiDelegado : delegate { void Invoke(string s); }",
+                    "interface MiDelegado { void Invoke(string s); }"
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: La página 67 muestra la sintaxis para definir un delegado, que incluye la palabra clave delegate, el tipo de retorno (o void), el nombre del tipo delegado y la lista de parámetros."
+            },
+            {
+                question: "Considera la siguiente expresión lambda: n => n * 2. ¿Qué representa esta sintaxis?",
+                options: [
+                    "Una llamada al método n con el parámetro n * 2.",
+                    "Una función anónima que recibe un parámetro n y devuelve el resultado de n * 2.",
+                    "La definición de una propiedad de solo lectura llamada n.",
+                    "Una forma de declarar una variable n inicializada con n * 2."
+                ],
+                correctAnswer: 1, // Índice b)
+                feedback: "Respuesta Correcta: b)\nFeedback: Las páginas 82 a 84 explican la sintaxis de las expresiones lambda. n => n * 2 es una forma concisa de escribir una función que toma un argumento n (el tipo se infiere del contexto, como un delegado FuncionEntera) y devuelve n * 2."
+            }
+        ];
+
+
+        // --- Resto del código JavaScript (sin cambios) ---
+        // Elementos del DOM
+        const quizContainer = document.getElementById('quiz-container');
+        const questionContainer = document.getElementById('question-container');
+        const questionNumberEl = document.getElementById('question-number');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsListEl = document.getElementById('options-list');
+        const submitBtn = document.getElementById('submit-btn');
+        const feedbackContainer = document.getElementById('feedback-container');
+        const feedbackResultEl = document.getElementById('feedback-result');
+        const feedbackExplanationEl = document.getElementById('feedback-explanation');
+        const nextBtn = document.getElementById('next-btn');
+        const scoreContainer = document.getElementById('score-container');
+        const scoreEl = document.getElementById('score');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const restartBtn = document.getElementById('restart-btn');
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            feedbackContainer.style.display = 'none';
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'block';
+            submitBtn.disabled = false;
+            nextBtn.textContent = 'Siguiente Pregunta'; // Restablecer texto del botón
+
+            const currentQuestion = quizData[currentQuestionIndex];
+
+            questionNumberEl.textContent = `Pregunta ${currentQuestionIndex + 1} de ${quizData.length}`;
+            questionTextEl.textContent = currentQuestion.question;
+            optionsListEl.innerHTML = '';
+
+            currentQuestion.options.forEach((option, index) => {
+                const li = document.createElement('li');
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'option';
+                input.value = index;
+                input.id = `option${index}`;
+
+                const label = document.createElement('label');
+                const letterPrefix = String.fromCharCode(97 + index) + ') '; // a), b), c)...
+                label.textContent = letterPrefix + option;
+                label.htmlFor = `option${index}`;
+
+                li.appendChild(input);
+                li.appendChild(label);
+                optionsListEl.appendChild(li);
+            });
+        }
+
+        function checkAnswer() {
+            const selectedOptionInput = optionsListEl.querySelector('input[name="option"]:checked');
+
+            if (!selectedOptionInput) {
+                alert('Por favor, selecciona una respuesta.');
+                return;
+            }
+
+            const selectedAnswerIndex = parseInt(selectedOptionInput.value);
+            const currentQuestion = quizData[currentQuestionIndex];
+
+            // Procesar feedback para enlaces PDF
+            let feedbackText = currentQuestion.feedback;
+            const pageRegex = /(p[áa]gina[s]?\s*)(\d+([-\s,a-y]+\d+)*)/gi; // Ajustado para capturar rangos con 'a' o 'y'
+            let match;
+
+             if (typeof feedbackText.replaceAll === 'function') {
+                 feedbackText = feedbackText.replaceAll(pageRegex, (fullMatch, prefix, pageNums) => {
+                     const firstPageNum = pageNums.match(/\d+/)[0]; // Toma el primer número para el enlace
+                     const pdfUrl = `${pdfFileName}#page=${firstPageNum}`;
+                     return `${prefix}<a href="${pdfUrl}" target="_blank" title="Abrir PDF en página ${firstPageNum}">${pageNums}</a>`;
+                 });
+             } else {
+                  // Fallback
+                  while ((match = pageRegex.exec(feedbackText)) !== null) {
+                     const fullMatch = match[0];
+                     const prefix = match[1];
+                     const pageNums = match[2];
+                     const firstPageNum = pageNums.match(/\d+/)[0];
+                     const pdfUrl = `${pdfFileName}#page=${firstPageNum}`;
+                     const pageLink = `${prefix}<a href="${pdfUrl}" target="_blank" title="Abrir PDF en página ${firstPageNum}">${pageNums}</a>`;
+                     feedbackText = feedbackText.replace(fullMatch, pageLink);
+                     pageRegex.lastIndex = 0;
+                  }
+             }
+
+
+            // Mostrar feedback
+            feedbackContainer.style.display = 'block';
+            feedbackExplanationEl.innerHTML = feedbackText; // Usar innerHTML
+            feedbackContainer.classList.remove('feedback-correct', 'feedback-incorrect');
+
+            // Evaluar respuesta y actualizar UI
+            if (selectedAnswerIndex === currentQuestion.correctAnswer) {
+                score++;
+                feedbackResultEl.textContent = '¡Correcto!';
+                feedbackContainer.classList.add('feedback-correct');
+            } else {
+                 feedbackResultEl.textContent = 'Incorrecto.';
+                feedbackContainer.classList.add('feedback-incorrect');
+                 const correctLi = optionsListEl.children[currentQuestion.correctAnswer];
+                 if(correctLi) {
+                     correctLi.style.backgroundColor = '#d4edda';
+                     correctLi.style.fontWeight = 'bold';
+                 }
+            }
+
+            // Deshabilitar interacción post-respuesta
+            submitBtn.disabled = true;
+            submitBtn.style.display = 'none';
+            const radioButtons = optionsListEl.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(rb => rb.disabled = true);
+            const listItems = optionsListEl.querySelectorAll('li');
+            listItems.forEach(li => li.style.cursor = 'default');
+
+            // Mostrar el botón "Siguiente" o "Ver Resultados"
+            nextBtn.style.display = 'block';
+            if (currentQuestionIndex >= quizData.length - 1) {
+                nextBtn.textContent = 'Ver Resultados Finales';
+            }
+        }
+
+        function nextQuestion() {
+            // Comprobar si estamos en la última pregunta ANTES de incrementar
+             if (currentQuestionIndex >= quizData.length - 1) {
+                 showResults();
+                 return;
+             }
+
+            // Si no es la última, incrementar índice y cargar siguiente
+             currentQuestionIndex++;
+             Array.from(optionsListEl.children).forEach(li => {
+                li.style.backgroundColor = '';
+                li.style.fontWeight = '';
+                li.style.cursor = 'pointer';
+            });
+             loadQuestion();
+        }
+
+         function showResults() {
+            questionContainer.style.display = 'none';
+            submitBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            feedbackContainer.style.display = 'none';
+            scoreContainer.style.display = 'block';
+            scoreEl.textContent = score;
+            totalQuestionsEl.textContent = quizData.length;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            scoreContainer.style.display = 'none';
+            questionContainer.style.display = 'block';
+             Array.from(optionsListEl.children).forEach(li => {
+                 li.style.backgroundColor = '';
+                 li.style.fontWeight = '';
+                 li.style.cursor = 'pointer';
+             });
+            loadQuestion();
+        }
+
+        // Event Listeners
+        submitBtn.addEventListener('click', checkAnswer);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // Carga inicial
+        loadQuestion();
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/HolaBlazor/obj/Debug/net8.0/HolaBlazor.GeneratedMSBuildEditorConfig.editorconfig
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/HolaBlazor/obj/Debug/net8.0/HolaBlazor.AssemblyInfoInputs.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/HolaBlazor/obj/Debug/net8.0/HolaBlazor.AssemblyInfo.cs
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/HolaBlazor/obj/Debug/net8.0/HolaBlazor.csproj.CoreCompileInputs.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/HolaBlazor/obj/Debug/net8.0/HolaBlazor.MvcApplicationPartsAssemblyInfo.cache
+/home/pelo/Documentos/UNLP/2do año/Seminario .NET/Teorias/HolaBlazor/obj/Debug/net8.0/HolaBlazor.sourcelink.json
