@@ -21,24 +21,28 @@ Cree una clase Java llamada RedBinariaLlena donde implementará lo solicitado en
 método retardoReenvio():int
  */
 
+// hay que conseguir el 
+
 public class RedBinariaLlena {
-    private BinaryTree<Integer> retardos;
+    private BinaryTree<Integer> bt;
 
     public RedBinariaLlena(BinaryTree<Integer> retardos) {
-        this.retardos = retardos;
+        this.bt = retardos;
     }
 
     public int retardoReenvio() {
-        if (retardos == null || retardos.isEmpty()) return 0;
-        return calcularRetardoRecursivo(retardos, 0);
+        if (bt == null || bt.isEmpty()) return 0;
+        return calcularRetardoRecursivo(bt);
     }
 
-    private int calcularRetardoRecursivo(BinaryTree<Integer> bt, int segundos) {
-        if (!bt.isLeaf()) {
-            if (bt.hasLeftChild()) {
-
-            }
+    private int calcularRetardoRecursivo(BinaryTree<Integer> bt) {
+        if (bt.isLeaf()) {
             return bt.getData();
+        } else {
+            int leftChild = (bt.hasLeftChild()) ? calcularRetardoRecursivo(bt.getLeftChild()) : 0;
+            int rightChild = (bt.hasRightChild()) ? calcularRetardoRecursivo(bt.getRightChild()) : 0;
+            // return (rightChild >= leftChild) ? rightChild + bt.getData() : leftChild + bt.getData();
+            return Math.max(leftChild, rightChild) + bt.getData();
         }
     }
 }
