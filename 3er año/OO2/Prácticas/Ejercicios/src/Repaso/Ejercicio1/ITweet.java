@@ -1,5 +1,6 @@
 package Repaso.Ejercicio1;
 
-public class Tweet {
-    private String texto;
+public interface ITweet {
+    public String getText();
+    public String getPublicationDate();
 }
